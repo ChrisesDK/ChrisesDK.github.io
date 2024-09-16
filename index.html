@@ -3,24 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Webpage</title>
+    <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Simple Webpage</h1>
-        <p>Click the button below to see an interactive message!</p>
+    <!-- Top Navigation Bar -->
+    <header class="topbar">
+        <div class="logo">My Portfolio</div>
+        <nav>
+            <ul>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main>
-        <button id="actionButton">Click Me!</button>
-        <p id="message"></p>
-    </main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to My Portfolio</h1>
+        <p>Here you'll find a collection of my projects and experiences.</p>
+    </section>
 
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <h2>My Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Project 1</h3>
+                <p>A brief description of the project.</p>
+            </div>
+            <div class="project-card">
+                <h3>Project 2</h3>
+                <p>A brief description of the project.</p>
+            </div>
+            <div class="project-card">
+                <h3>Project 3</h3>
+                <p>A brief description of the project.</p>
+            </div>
+            <!-- Add more project cards as needed -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <h2>About Me</h2>
+        <p>Write a short bio or summary about yourself, your skills, and your experience.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <h2>Contact Me</h2>
+        <p>Feel free to reach out for any questions or opportunities.</p>
+
+        <form id="contactForm" action="send_email.php" method="POST">
+            <div class="form-group">
+                <label for="firstName">Fornavn:</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Efternavn:</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Emne:</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Besked (max 250 tegn):</label>
+                <textarea id="message" name="message" maxlength="250" required></textarea>
+                <div id="charCount">0/250</div>
+            </div>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>© 2024 My Simple Webpage</p>
+        <p>© 2024 My Portfolio</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
+x
