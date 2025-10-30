@@ -1,0 +1,5 @@
+open terminal in root folder
+run this command:
+node generateMediaJSON.js
+
+Push to Github
