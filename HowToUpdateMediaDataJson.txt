@@ -3,3 +3,6 @@ run this command:
 node generateMediaJSON.js
 
 Push to Github
+Delete cached browser data
+
+Maybe switch js version? in html to force update
