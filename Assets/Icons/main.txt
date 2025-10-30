@@ -1,0 +1,44 @@
+from machine import Pin
+from BLEPeripheral import BLEPeripheral
+
+
+led = Pin("LED", Pin.OUT)
+
+BluetoothControls = (
+    ("button", "Hello World"),
+)
+
+
+def handle_receive(msg): # callback metode når besked modtages fra applikation
+    command_type, payload = msg.split(",", 1)
+
+    if command_type == "button":
+        button_name = payload
+            
+        if button_name == "Hello World":
+            print("Hello World!")
+
+        else:
+            print("Unknown button command:", button_name)
+            
+    else:
+        print("Unknown command type:", command_type)
+
+
+def handle_send(msg: str): # Hjælper metode til at sende information til applikationen (evt sensor data)
+    if ble_peripheral.connected:
+        ble_peripheral.send(msg)
+
+def on_connect(): # callback metode når en applikation forbinder til Picoen
+    led.on()
+    print("BLE client connected!")
+
+def on_disconnect(): # callback metode når en applikation frakobler fra Picoen
+    led.off()
+    print("BLE client disconnected!")
+
+
+ble_peripheral = BLEPeripheral(base_controls=BluetoothControls, device_base_name="MinEnhed")
+ble_peripheral.on_write(handle_receive)
+ble_peripheral.on_connect(on_connect)
+ble_peripheral.on_disconnect(on_disconnect)
