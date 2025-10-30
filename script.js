@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // ====== CONTACT FORM HANDLING ======
+    // =========================================================
+    // 1. CONTACT FORM HANDLING
+    // =========================================================
     const contactForm = document.getElementById('contactForm');
     const confirmationOverlay = document.getElementById('confirmationOverlay');
     const confirmationMessage = document.getElementById('confirmationMessage');
@@ -13,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let isValid = true;
         const inputs = document.querySelectorAll('.form-group input:not(#organization), .form-group textarea');
 
-        // reset
+        // reset errors
         inputs.forEach(input => input.classList.remove('error'));
 
         // validate
@@ -35,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
             method: 'POST',
             body: new FormData(contactForm)
         })
-            .then(r => r.text())
+            .then(response => response.text())
             .then(result => {
                 if (result === 'success') {
                     confirmationMessage.innerHTML = 'Your message has been sent successfully!';
@@ -64,13 +66,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // character counter
     const messageField = document.getElementById('message');
     const charCount = document.getElementById('charCount');
-    messageField.addEventListener('input', () => {
+    messageField.addEventListener('input', function () {
         charCount.textContent = `${messageField.value.length}/250`;
     });
 
-    // remove error on input
+    // remove error when typing
     document.querySelectorAll('.form-group input, .form-group textarea').forEach(input => {
-        input.addEventListener('input', () => {
+        input.addEventListener('input', function () {
             if (input.classList.contains('error')) {
                 if (input.value.trim() !== '' && !(input.id === 'email' && !emailPattern.test(input.value))) {
                     input.classList.remove('error');
@@ -79,7 +81,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // ====== HAMBURGER MENU ======
+    // =========================================================
+    // 2. HAMBURGER MENU
+    // =========================================================
     const menuToggle = document.querySelector('.menu-toggle');
     const popupMenu = document.querySelector('.popup-menu');
 
@@ -107,7 +111,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // ====== ROTATING CUBE ======
+    // =========================================================
+    // 3. ROTATING CUBE
+    // =========================================================
     const cube = document.querySelector('.cube');
     const cubeFaces = document.querySelectorAll('.cube-face');
     let currentAngle = 0;
@@ -157,7 +163,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     setInterval(rotateCube, 1500);
 
-    // ====== PROJECT TABS ======
+    // =========================================================
+    // 4. PROJECT TABS
+    // =========================================================
     const projectTabs = document.querySelectorAll('.project-tab');
     const projectCategories = document.querySelectorAll('.project-category');
 
@@ -165,8 +173,11 @@ document.addEventListener('DOMContentLoaded', function () {
         tab.addEventListener('click', () => {
             const targetId = tab.getAttribute('data-target');
 
+            projectTabs.forEach(t => t.removeAttribute('aria-current'));
             projectTabs.forEach(t => t.classList.remove('active'));
+
             tab.classList.add('active');
+            tab.setAttribute('aria-current', 'page');
 
             projectCategories.forEach(cat => {
                 if (cat.id === targetId) {
@@ -178,147 +189,49 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // ====== MEDIA DATA (mock, to be replaced with folder JSON later) ======
-    const mediaData = {
-        "Bachelor Project (Rudder Service and Catastrophy Preparation at Sea, In collaboration with the danish home defense)": [
-            "https://via.placeholder.com/1200x700?text=Bachelor+Project+1",
-            "https://via.placeholder.com/1200x700?text=Bachelor+Project+2"
-        ],
-        "ErhvervsTankens Skov og Naturtekniker": [
-            "https://via.placeholder.com/1200x700?text=Skov+og+Naturtekniker+1",
-            "https://via.placeholder.com/1200x700?text=Skov+og+Naturtekniker+2"
-        ],
-        "ErhvervsTankens SOSU DigiTech Assistent": [
-            "https://via.placeholder.com/1200x700?text=SOSU+DigiTech+1"
-        ],
-        "ErhvervsTankens Elektriker og VVS": [
-            "https://via.placeholder.com/1200x700?text=Elektriker+og+VVS"
-        ],
-        "ErhvervsTankens Automatiktekniker Koncept": [
-            "https://via.placeholder.com/1200x700?text=Automatiktekniker+Koncept"
-        ],
-        "Maelstorm": [
-            "https://via.placeholder.com/1200x700?text=Maelstorm+1",
-            "https://via.placeholder.com/1200x700?text=Maelstorm+2",
-            "https://via.placeholder.com/1200x700?text=Maelstorm+3"
-        ],
-        "Maelstorm Bean Bandits": [
-            "https://via.placeholder.com/1200x700?text=Bean+Bandits"
-        ],
-        "Poly Airplanes": [
-            "https://via.placeholder.com/1200x700?text=Poly+Airplanes"
-        ],
-        "Poly Copter": [
-            "https://via.placeholder.com/1200x700?text=Poly+Copter"
-        ],
-        "Poly Rally": [
-            "https://via.placeholder.com/1200x700?text=Poly+Rally+1",
-            "https://via.placeholder.com/1200x700?text=Poly+Rally+2"
-        ],
-        "Sheepy Ranch": [
-            "https://via.placeholder.com/1200x700?text=Sheepy+Ranch"
-        ],
-        "Ducky Pond": [
-            "https://via.placeholder.com/1200x700?text=Ducky+Pond"
-        ],
-        "VR Construction Wrecker": [
-            "https://via.placeholder.com/1200x700?text=VR+Construction+Wrecker"
-        ],
-        "Skate Game Go WEE": [
-            "https://via.placeholder.com/1200x700?text=Skate+Game+Go+WEE"
-        ],
-        "Misc": [
-            "https://via.placeholder.com/1200x700?text=Misc+1",
-            "https://via.placeholder.com/1200x700?text=Misc+2"
-        ],
-        "Wireless BLE Controller of Raspberry Pi Pico W": [
-            "https://via.placeholder.com/1200x700?text=BLE+Controller"
-        ],
-        "Personal Handheld Gaming Device": [
-            "https://via.placeholder.com/1200x700?text=Handheld+Gaming"
-        ],
-        "Personal Nerf Dart Turret": [
-            "https://via.placeholder.com/1200x700?text=Nerf+Dart+Turret"
-        ],
-        "Personal Robot Arm": [
-            "https://via.placeholder.com/1200x700?text=Personal+Robot+Arm"
-        ],
-        "School Escape Room": [
-            "https://via.placeholder.com/1200x700?text=Escape+Room"
-        ],
-        "School Motor Controller PCB": [
-            "https://via.placeholder.com/1200x700?text=Motor+Controller+PCB"
-        ],
-        "School Omni-Directional Car": [
-            "https://via.placeholder.com/1200x700?text=Omni+Directional+Car"
-        ],
-        "School Robot Controlled in Virtual Reality": [
-            "https://via.placeholder.com/1200x700?text=Robot+in+VR"
-        ],
-        "School Sun-Catcher": [
-            "https://via.placeholder.com/1200x700?text=Sun-Catcher"
-        ],
-        "School Toaster Timer": [
-            "https://via.placeholder.com/1200x700?text=Toaster+Timer"
-        ],
-        "Nano Hogwarts Legacy": [
-            "https://via.placeholder.com/1200x700?text=Nano+Hogwarts+Legacy"
-        ],
-        "Manual Danse-Krabbe": [
-            "https://via.placeholder.com/1200x700?text=Danse-Krabbe"
-        ],
-        "Manual Farvesorteringsmaskine": [
-            "https://via.placeholder.com/1200x700?text=Farvesorteringsmaskine"
-        ],
-        "Manual Farvesorteringsmaskine Avanceret": [
-            "https://via.placeholder.com/1200x700?text=Farvesorteringsmaskine+Avanceret"
-        ],
-        "Manual Gaffeltruck": [
-            "https://via.placeholder.com/1200x700?text=Gaffeltruck"
-        ],
-        "Manual Guitar": [
-            "https://via.placeholder.com/1200x700?text=Guitar"
-        ],
-        "Manual Kortdeler": [
-            "https://via.placeholder.com/1200x700?text=Kortdeler"
-        ],
-        "Manual Robot Arm": [
-            "https://via.placeholder.com/1200x700?text=Robot+Arm"
-        ],
-        "Manual Robot Arm Stor": [
-            "https://via.placeholder.com/1200x700?text=Robot+Arm+Stor"
-        ],
-        "Manual Rul-Bot": [
-            "https://via.placeholder.com/1200x700?text=Rul-Bot"
-        ],
-        "ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025": [
-            "https://via.placeholder.com/1200x700?text=Lego+Spike+2024-2025"
-        ],
-        "Teknologiskolen Instructor at Camp Autumn 2025": [
-            "https://via.placeholder.com/1200x700?text=Camp+Autumn+2025"
-        ],
-        "Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025": [
-            "https://via.placeholder.com/1200x700?text=Lego+Spike+2025"
-        ]
-    };
-
-    // we keep which media index each card is on
+    // =========================================================
+    // 5. MEDIA: load from mediaData.json (with logging + fallback)
+    // =========================================================
+    // structure: { "Category": { "Project": [ "path1", "path2", ... ] } }
+    let mediaData = {};
+    // current index per card element
     const perCardIndex = new Map();
+    // which card opened the modal
+    let gallerySourceCard = null;
 
-    // ====== HELPER: update arrows on a single CARD ======
+    fetch('mediaData.json')
+        .then(res => {
+            if (!res.ok) {
+                // e.g. 404
+                throw new Error('mediaData.json not found. HTTP ' + res.status);
+            }
+            return res.json();
+        })
+        .then(data => {
+            console.log('✅ Loaded mediaData.json', data);
+            mediaData = data || {};
+            initializeProjectCards();
+        })
+        .catch(err => {
+            console.error('❌ Could not load mediaData.json. Falling back to placeholder.', err);
+            mediaData = {}; // empty -> cards will use placeholder
+            initializeProjectCards();
+        });
+
+    // =========================================================
+    // 6. HELPER: update arrows on a single CARD
+    // =========================================================
     function updateCardArrows(card, currentIndex, mediaLength) {
         const btnPrev = card.querySelector('.card-nav.left');
         const btnNext = card.querySelector('.card-nav.right');
         if (!btnPrev || !btnNext) return;
 
-        // left
         if (currentIndex <= 0) {
             btnPrev.classList.add('is-disabled');
         } else {
             btnPrev.classList.remove('is-disabled');
         }
 
-        // right
         if (currentIndex >= mediaLength - 1) {
             btnNext.classList.add('is-disabled');
         } else {
@@ -326,72 +239,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // ====== INIT CARDS ======
-    const cards = document.querySelectorAll('.project-card');
-
-    // we will also need to know which card opened the modal
-    let gallerySourceCard = null;
-
-    cards.forEach(card => {
-        const projectName = card.dataset.project;
-        const mediaList = mediaData[projectName] || ["https://via.placeholder.com/1200x700?text=No+Media"];
-
-        // start each card at 0
-        perCardIndex.set(card, 0);
-
-        const imgEl = card.querySelector('.project-media-img');
-        if (imgEl) {
-            imgEl.src = mediaList[0];
-        }
-
-        // initial arrow state
-        updateCardArrows(card, 0, mediaList.length);
-
-        const btnPrev = card.querySelector('.card-nav.left');
-        const btnNext = card.querySelector('.card-nav.right');
-
-        // card prev
-        if (btnPrev) {
-            btnPrev.addEventListener('click', (e) => {
-                e.stopPropagation(); // don't open modal
-                let idx = perCardIndex.get(card) || 0;
-                if (idx > 0) {
-                    idx = idx - 1;
-                    perCardIndex.set(card, idx);
-                    if (imgEl) imgEl.src = mediaList[idx];
-                    updateCardArrows(card, idx, mediaList.length);
-                }
-            });
-        }
-
-        // card next
-        if (btnNext) {
-            btnNext.addEventListener('click', (e) => {
-                e.stopPropagation();
-                let idx = perCardIndex.get(card) || 0;
-                if (idx < mediaList.length - 1) {
-                    idx = idx + 1;
-                    perCardIndex.set(card, idx);
-                    if (imgEl) imgEl.src = mediaList[idx];
-                    updateCardArrows(card, idx, mediaList.length);
-                }
-            });
-        }
-
-        // clicking the card opens the big viewer
-        card.addEventListener('click', () => {
-            const activeCatTab = document.querySelector('.project-tab.active');
-            const catName = activeCatTab ? activeCatTab.textContent.trim() : (card.dataset.category || 'Project');
-
-            // remember this card
-            gallerySourceCard = card;
-
-            const startIndex = perCardIndex.get(card) || 0;
-            openGallery(projectName, catName, startIndex);
-        });
-    });
-
-    // ====== MODAL ELEMENTS ======
+    // =========================================================
+    // 7. GALLERY / MODAL ELEMENTS (global)
+    // =========================================================
     const galleryModal = document.getElementById('galleryModal');
     const galleryClose = document.getElementById('galleryClose');
     const galleryTitle = document.getElementById('galleryTitle');
@@ -401,25 +251,25 @@ document.addEventListener('DOMContentLoaded', function () {
     const galleryImage = document.getElementById('galleryImage');
     const galleryVideo = document.getElementById('galleryVideo');
     const galleryProgressBar = document.getElementById('galleryProgressBar');
-
     const galleryPrev = document.getElementById('galleryPrev');
     const galleryNext = document.getElementById('galleryNext');
 
+    // current media shown in modal
     let currentGalleryMedia = [];
     let currentGalleryIndex = 0;
 
-    // ====== HELPER: update arrows on MODAL ======
+    // =========================================================
+    // 8. HELPER: update MODAL arrows
+    // =========================================================
     function updateGalleryArrows() {
         if (!galleryPrev || !galleryNext) return;
 
-        // left
         if (currentGalleryIndex <= 0) {
             galleryPrev.classList.add('is-disabled');
         } else {
             galleryPrev.classList.remove('is-disabled');
         }
 
-        // right
         if (currentGalleryIndex >= currentGalleryMedia.length - 1) {
             galleryNext.classList.add('is-disabled');
         } else {
@@ -427,14 +277,93 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // ====== OPEN GALLERY ======
-    function openGallery(projectName, categoryName, startIndex = 0) {
-        const mediaList = mediaData[projectName] || ["https://via.placeholder.com/1200x700?text=No+Media"];
+    // =========================================================
+    // 9. INITIALIZE CARDS (runs AFTER mediaData is loaded)
+    // =========================================================
+    function initializeProjectCards() {
+        const cards = document.querySelectorAll('.project-card');
+
+        cards.forEach(card => {
+            const categoryName = card.dataset.category;
+            const projectName = card.dataset.project;
+
+            // try to find media list based on category + project
+            let mediaList = [];
+            if (
+                categoryName &&
+                projectName &&
+                mediaData[categoryName] &&
+                mediaData[categoryName][projectName]
+            ) {
+                mediaList = mediaData[categoryName][projectName];
+            } else {
+                // fallback image if not found
+                mediaList = ["https://via.placeholder.com/1200x700?text=No+Media"];
+            }
+
+            console.log('📦 Card:', projectName, '→', mediaList);
+
+            // start each card at index 0
+            perCardIndex.set(card, 0);
+
+            // set initial image on card
+            const imgEl = card.querySelector('.project-media-img');
+            if (imgEl) {
+                imgEl.src = mediaList[0];
+            }
+
+            // initial arrow state
+            updateCardArrows(card, 0, mediaList.length);
+
+            const btnPrev = card.querySelector('.card-nav.left');
+            const btnNext = card.querySelector('.card-nav.right');
+
+            // CARD: prev
+            if (btnPrev) {
+                btnPrev.addEventListener('click', (e) => {
+                    e.stopPropagation(); // don't open modal
+                    let idx = perCardIndex.get(card) || 0;
+                    if (idx > 0) {
+                        idx = idx - 1;
+                        perCardIndex.set(card, idx);
+                        if (imgEl) imgEl.src = mediaList[idx];
+                        updateCardArrows(card, idx, mediaList.length);
+                    }
+                });
+            }
+
+            // CARD: next
+            if (btnNext) {
+                btnNext.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    let idx = perCardIndex.get(card) || 0;
+                    if (idx < mediaList.length - 1) {
+                        idx = idx + 1;
+                        perCardIndex.set(card, idx);
+                        if (imgEl) imgEl.src = mediaList[idx];
+                        updateCardArrows(card, idx, mediaList.length);
+                    }
+                });
+            }
+
+            // CARD: open modal
+            card.addEventListener('click', () => {
+                gallerySourceCard = card; // remember
+                const startIndex = perCardIndex.get(card) || 0;
+                openGallery(projectName, categoryName, mediaList, startIndex);
+            });
+        });
+    }
+
+    // =========================================================
+    // 10. OPEN GALLERY (with media list)
+    // =========================================================
+    function openGallery(projectName, categoryName, mediaList, startIndex = 0) {
         currentGalleryMedia = mediaList;
         currentGalleryIndex = Math.min(Math.max(startIndex, 0), mediaList.length - 1);
 
-        galleryTitle.textContent = projectName;
-        gallerySubtitle.textContent = categoryName;
+        galleryTitle.textContent = projectName || 'Project';
+        gallerySubtitle.textContent = categoryName || '';
 
         showGalleryMedia(currentGalleryIndex);
 
@@ -442,19 +371,24 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.classList.add('noscroll');
     }
 
-    // ====== CLOSE GALLERY ======
+    // =========================================================
+    // 11. CLOSE GALLERY
+    // =========================================================
     function closeGallery() {
         galleryModal.classList.remove('open');
         document.body.classList.remove('noscroll');
-        galleryVideo.pause();
-        // you can keep gallerySourceCard = null; or keep it
+        if (galleryVideo) {
+            galleryVideo.pause();
+        }
         gallerySourceCard = null;
     }
 
-    // ====== SHOW MEDIA IN MODAL ======
+    // =========================================================
+    // 12. SHOW MEDIA IN MODAL (also syncs back to card)
+    // =========================================================
     function showGalleryMedia(index) {
         const src = currentGalleryMedia[index];
-        const isVideo = /\.(mp4|webm|ogg)$/i.test(src);
+        const isVideo = src && /\.(mp4|webm|ogg)$/i.test(src);
 
         if (isVideo) {
             galleryVideo.style.display = 'block';
@@ -475,59 +409,64 @@ document.addEventListener('DOMContentLoaded', function () {
         const current = index + 1;
         const total = currentGalleryMedia.length;
 
-        // text counter
         galleryCounter.textContent = current + ' / ' + total;
 
-        // progressbar
         if (galleryProgressBar) {
             galleryProgressBar.style.width = (current / total) * 100 + '%';
         }
 
-        // 🔁 sync back to the card that opened the modal
+        // sync back to the card
         if (gallerySourceCard) {
-            // 1) remember index for that card
             perCardIndex.set(gallerySourceCard, index);
-
-            // 2) update card image
             const cardImg = gallerySourceCard.querySelector('.project-media-img');
             if (cardImg) {
                 cardImg.src = src;
             }
-
-            // 3) update card arrows to match modal index
             updateCardArrows(gallerySourceCard, index, total);
         }
 
-        // update modal arrows too
         updateGalleryArrows();
     }
 
-    // ====== MODAL NAV ======
-    galleryPrev.addEventListener('click', () => {
-        if (currentGalleryIndex > 0) {
-            currentGalleryIndex = currentGalleryIndex - 1;
-            showGalleryMedia(currentGalleryIndex);
-        }
-    });
+    // =========================================================
+    // 13. MODAL NAV BUTTONS
+    // =========================================================
+    if (galleryPrev) {
+        galleryPrev.addEventListener('click', () => {
+            if (currentGalleryIndex > 0) {
+                currentGalleryIndex = currentGalleryIndex - 1;
+                showGalleryMedia(currentGalleryIndex);
+            }
+        });
+    }
 
-    galleryNext.addEventListener('click', () => {
-        if (currentGalleryIndex < currentGalleryMedia.length - 1) {
-            currentGalleryIndex = currentGalleryIndex + 1;
-            showGalleryMedia(currentGalleryIndex);
-        }
-    });
+    if (galleryNext) {
+        galleryNext.addEventListener('click', () => {
+            if (currentGalleryIndex < currentGalleryMedia.length - 1) {
+                currentGalleryIndex = currentGalleryIndex + 1;
+                showGalleryMedia(currentGalleryIndex);
+            }
+        });
+    }
 
-    galleryClose.addEventListener('click', closeGallery);
+    if (galleryClose) {
+        galleryClose.addEventListener('click', closeGallery);
+    }
 
-    galleryModal.addEventListener('click', (e) => {
-        if (e.target === galleryModal) {
-            closeGallery();
-        }
-    });
+    // close when clicking backdrop
+    if (galleryModal) {
+        galleryModal.addEventListener('click', (e) => {
+            if (e.target === galleryModal) {
+                closeGallery();
+            }
+        });
+    }
 
-    // keyboard navigation (non-circular)
+    // =========================================================
+    // 14. KEYBOARD NAV (non-circular)
+    // =========================================================
     document.addEventListener('keydown', (e) => {
-        const isOpen = galleryModal.classList.contains('open');
+        const isOpen = galleryModal && galleryModal.classList.contains('open');
         if (!isOpen) return;
 
         if (e.key === 'Escape') {
