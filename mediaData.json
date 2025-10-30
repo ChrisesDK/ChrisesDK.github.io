@@ -28,7 +28,8 @@
       "Assets/Media/Game Development/Bachelor Project/9.png",
       "Assets/Media/Game Development/Bachelor Project/10.png",
       "Assets/Media/Game Development/Bachelor Project/11.png",
-      "Assets/Media/Game Development/Bachelor Project/12.png"
+      "Assets/Media/Game Development/Bachelor Project/12.png",
+      "Assets/Media/Game Development/Bachelor Project/13.mp4"
     ],
     "Construction Site Wrecker": [
       "Assets/Media/Game Development/Construction Site Wrecker/1.png",
@@ -150,8 +151,9 @@
   },
   "Hardware and Robotics": {
     "Escape Room": [
-      "Assets/Media/Hardware and Robotics/Escape Room/1.mp4",
-      "Assets/Media/Hardware and Robotics/Escape Room/2.mp4"
+      "Assets/Media/Hardware and Robotics/Escape Room/1.png",
+      "Assets/Media/Hardware and Robotics/Escape Room/2.mp4",
+      "Assets/Media/Hardware and Robotics/Escape Room/3.mp4"
     ],
     "Handheld Gaming Device": [
       "Assets/Media/Hardware and Robotics/Handheld Gaming Device/1.jpg",
@@ -163,10 +165,11 @@
       "Assets/Media/Hardware and Robotics/Handheld Gaming Device/7.jpg"
     ],
     "Motor Controller PCB": [
-      "Assets/Media/Hardware and Robotics/Motor Controller PCB/1.mp4",
-      "Assets/Media/Hardware and Robotics/Motor Controller PCB/2.png",
+      "Assets/Media/Hardware and Robotics/Motor Controller PCB/1.png",
+      "Assets/Media/Hardware and Robotics/Motor Controller PCB/2.mp4",
       "Assets/Media/Hardware and Robotics/Motor Controller PCB/3.png",
-      "Assets/Media/Hardware and Robotics/Motor Controller PCB/4.png"
+      "Assets/Media/Hardware and Robotics/Motor Controller PCB/4.png",
+      "Assets/Media/Hardware and Robotics/Motor Controller PCB/5.png"
     ],
     "Nerf Dart Turret": [
       "Assets/Media/Hardware and Robotics/Nerf Dart Turret/1.png",
@@ -176,15 +179,16 @@
       "Assets/Media/Hardware and Robotics/Nerf Dart Turret/5.png"
     ],
     "Omni-Directional Car": [
-      "Assets/Media/Hardware and Robotics/Omni-Directional Car/1.mp4",
+      "Assets/Media/Hardware and Robotics/Omni-Directional Car/1.png",
       "Assets/Media/Hardware and Robotics/Omni-Directional Car/2.mp4",
       "Assets/Media/Hardware and Robotics/Omni-Directional Car/3.mp4",
       "Assets/Media/Hardware and Robotics/Omni-Directional Car/4.mp4",
-      "Assets/Media/Hardware and Robotics/Omni-Directional Car/5.mp4"
+      "Assets/Media/Hardware and Robotics/Omni-Directional Car/5.mp4",
+      "Assets/Media/Hardware and Robotics/Omni-Directional Car/6.mp4"
     ],
     "Robot Controlled in Virtual Reality": [
-      "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/1.mp4",
-      "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/2.jpg",
+      "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/1.jpg",
+      "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/2.mp4",
       "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/3.jpg",
       "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/4.jpg",
       "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/5.jpg",
@@ -194,17 +198,20 @@
       "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/9.jpg"
     ],
     "Sun-Catcher": [
-      "Assets/Media/Hardware and Robotics/Sun-Catcher/1.mp4",
-      "Assets/Media/Hardware and Robotics/Sun-Catcher/2.png",
-      "Assets/Media/Hardware and Robotics/Sun-Catcher/3.jpg"
+      "Assets/Media/Hardware and Robotics/Sun-Catcher/1.png",
+      "Assets/Media/Hardware and Robotics/Sun-Catcher/2.mp4",
+      "Assets/Media/Hardware and Robotics/Sun-Catcher/3.png",
+      "Assets/Media/Hardware and Robotics/Sun-Catcher/4.jpg"
     ],
     "Toaster": [
-      "Assets/Media/Hardware and Robotics/Toaster/1.mp4"
+      "Assets/Media/Hardware and Robotics/Toaster/1.png",
+      "Assets/Media/Hardware and Robotics/Toaster/2.mp4"
     ]
   },
   "Lego Studio": {
     "Danse-Krabbe": [
-      "Assets/Media/Lego Studio/Danse-Krabbe/1_1x.png",
+      "Assets/Media/Lego Studio/Danse-Krabbe/1_1x1.png",
+      "Assets/Media/Lego Studio/Danse-Krabbe/1_1x2.png",
       "Assets/Media/Lego Studio/Danse-Krabbe/2_1x.png",
       "Assets/Media/Lego Studio/Danse-Krabbe/3_1x.png",
       "Assets/Media/Lego Studio/Danse-Krabbe/4_1x.png",
@@ -258,8 +265,7 @@
       "Assets/Media/Lego Studio/Danse-Krabbe/52_1x.png",
       "Assets/Media/Lego Studio/Danse-Krabbe/53_1x.png",
       "Assets/Media/Lego Studio/Danse-Krabbe/54_1x.png",
-      "Assets/Media/Lego Studio/Danse-Krabbe/55_1x.png",
-      "Assets/Media/Lego Studio/Danse-Krabbe/Cover.png"
+      "Assets/Media/Lego Studio/Danse-Krabbe/55_1x.png"
     ],
     "Farvesorteringsmaskine": [
       "Assets/Media/Lego Studio/Farvesorteringsmaskine/1.png",
@@ -302,6 +308,7 @@
     ],
     "Farvesorteringsmaskine Avanceret": [
       "Assets/Media/Lego Studio/Farvesorteringsmaskine Avanceret/1_1x.png",
+      "Assets/Media/Lego Studio/Farvesorteringsmaskine Avanceret/1.png",
       "Assets/Media/Lego Studio/Farvesorteringsmaskine Avanceret/2_1x.png",
       "Assets/Media/Lego Studio/Farvesorteringsmaskine Avanceret/3_1x.png",
       "Assets/Media/Lego Studio/Farvesorteringsmaskine Avanceret/4_1x.png",
@@ -387,11 +394,11 @@
       "Assets/Media/Lego Studio/Farvesorteringsmaskine Avanceret/84_1x.png",
       "Assets/Media/Lego Studio/Farvesorteringsmaskine Avanceret/85_1x.png",
       "Assets/Media/Lego Studio/Farvesorteringsmaskine Avanceret/86_1x.png",
-      "Assets/Media/Lego Studio/Farvesorteringsmaskine Avanceret/87_1x.png",
-      "Assets/Media/Lego Studio/Farvesorteringsmaskine Avanceret/Cover.png"
+      "Assets/Media/Lego Studio/Farvesorteringsmaskine Avanceret/87_1x.png"
     ],
     "Gaffeltruck": [
       "Assets/Media/Lego Studio/Gaffeltruck/1_1x.png",
+      "Assets/Media/Lego Studio/Gaffeltruck/1.png",
       "Assets/Media/Lego Studio/Gaffeltruck/2_1x.png",
       "Assets/Media/Lego Studio/Gaffeltruck/3_1x.png",
       "Assets/Media/Lego Studio/Gaffeltruck/4_1x.png",
@@ -469,11 +476,11 @@
       "Assets/Media/Lego Studio/Gaffeltruck/76_1x.png",
       "Assets/Media/Lego Studio/Gaffeltruck/77_1x.png",
       "Assets/Media/Lego Studio/Gaffeltruck/78_1x.png",
-      "Assets/Media/Lego Studio/Gaffeltruck/79_1x.png",
-      "Assets/Media/Lego Studio/Gaffeltruck/Cover.png"
+      "Assets/Media/Lego Studio/Gaffeltruck/79_1x.png"
     ],
     "Guitar": [
       "Assets/Media/Lego Studio/Guitar/1_1x.png",
+      "Assets/Media/Lego Studio/Guitar/1.png",
       "Assets/Media/Lego Studio/Guitar/2_1x.png",
       "Assets/Media/Lego Studio/Guitar/3_1x.png",
       "Assets/Media/Lego Studio/Guitar/4_1x.png",
@@ -522,11 +529,11 @@
       "Assets/Media/Lego Studio/Guitar/47_1x.png",
       "Assets/Media/Lego Studio/Guitar/48_1x.png",
       "Assets/Media/Lego Studio/Guitar/49_1x.png",
-      "Assets/Media/Lego Studio/Guitar/50_1x.png",
-      "Assets/Media/Lego Studio/Guitar/Cover.png"
+      "Assets/Media/Lego Studio/Guitar/50_1x.png"
     ],
     "Kortdeler": [
       "Assets/Media/Lego Studio/Kortdeler/1_1x.png",
+      "Assets/Media/Lego Studio/Kortdeler/1.png",
       "Assets/Media/Lego Studio/Kortdeler/2_1x.png",
       "Assets/Media/Lego Studio/Kortdeler/3_1x.png",
       "Assets/Media/Lego Studio/Kortdeler/4_1x.png",
@@ -574,14 +581,13 @@
       "Assets/Media/Lego Studio/Kortdeler/46_1x.png",
       "Assets/Media/Lego Studio/Kortdeler/47_1x.png",
       "Assets/Media/Lego Studio/Kortdeler/48_1x.png",
-      "Assets/Media/Lego Studio/Kortdeler/49_1x.png",
-      "Assets/Media/Lego Studio/Kortdeler/Cover.png"
+      "Assets/Media/Lego Studio/Kortdeler/49_1x.png"
     ],
     "Nano Hogwarts Legacy": [
-      "Assets/Media/Lego Studio/Nano Hogwarts Legacy/10 x 30435 Poly-Bags.png",
-      "Assets/Media/Lego Studio/Nano Hogwarts Legacy/Lego Studio Nano Hogwarts Legacy.mp4",
-      "Assets/Media/Lego Studio/Nano Hogwarts Legacy/Lego Studio Nano Hogwarts Legacy.png",
-      "Assets/Media/Lego Studio/Nano Hogwarts Legacy/Nano Hogwarts Legacy.jpg"
+      "Assets/Media/Lego Studio/Nano Hogwarts Legacy/1.jpg",
+      "Assets/Media/Lego Studio/Nano Hogwarts Legacy/2.png",
+      "Assets/Media/Lego Studio/Nano Hogwarts Legacy/3.mp4",
+      "Assets/Media/Lego Studio/Nano Hogwarts Legacy/4.png"
     ],
     "Robot Arm": [
       "Assets/Media/Lego Studio/Robot Arm/1.png",
@@ -811,11 +817,11 @@
       "Assets/Media/Lego Studio/Robot Arm Stor/173_1x.png",
       "Assets/Media/Lego Studio/Robot Arm Stor/174_1x.png",
       "Assets/Media/Lego Studio/Robot Arm Stor/175_1x.png",
-      "Assets/Media/Lego Studio/Robot Arm Stor/176_1x.png",
-      "Assets/Media/Lego Studio/Robot Arm Stor/Cover.png"
+      "Assets/Media/Lego Studio/Robot Arm Stor/176_1x.png"
     ],
     "Rul-Bot": [
       "Assets/Media/Lego Studio/Rul-Bot/1_1x.png",
+      "Assets/Media/Lego Studio/Rul-Bot/1.png",
       "Assets/Media/Lego Studio/Rul-Bot/2_1x.png",
       "Assets/Media/Lego Studio/Rul-Bot/3_1x.png",
       "Assets/Media/Lego Studio/Rul-Bot/4_1x.png",
@@ -861,16 +867,15 @@
       "Assets/Media/Lego Studio/Rul-Bot/44_1x.png",
       "Assets/Media/Lego Studio/Rul-Bot/45_1x.png",
       "Assets/Media/Lego Studio/Rul-Bot/46_1x.png",
-      "Assets/Media/Lego Studio/Rul-Bot/47_1x.png",
-      "Assets/Media/Lego Studio/Rul-Bot/Cover.png"
+      "Assets/Media/Lego Studio/Rul-Bot/47_1x.png"
     ]
   },
   "Teaching Design": {
     "ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025": [
-      "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/1.mp4",
+      "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/1.png",
       "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/2.mp4",
       "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/3.mp4",
-      "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/4.png"
+      "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/4.mp4"
     ],
     "Teknologiskolen Instructor at Camp Autumn 2025": [
       "Assets/Media/Teaching Design/Teknologiskolen Instructor at Camp Autumn 2025/1.png",
