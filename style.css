@@ -1,0 +1,543 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+/* Topbar styles - remove padding to ensure full left alignment */
+.topbar {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+    height: 60px;
+    padding: 0; /* Removed padding to align the logo to the left */
+}
+
+/* Logo Styles */
+.logo {
+    background-color: #222; /* Slightly darker background than the topbar */
+    font-family: 'Arial Black', sans-serif; /* Blocky font style */
+    font-size: 1.5rem; /* Adjust font size */
+    width: 150px; /* Fixed width */
+    height: 60px; /* Fixed height */
+    display: flex;
+    justify-content: center; /* Horizontally center the text */
+    align-items: center; /* Vertically center the text */
+    color: white;
+    text-align: center; /* Center text alignment */
+    line-height: 1.2; /* Adjust line height */
+    box-sizing: border-box;
+    margin: 0; /* Ensure no extra margin */
+    padding: 0; /* Ensure no padding inside the logo */
+    position: relative;
+}
+
+/* Add these styles for the logo link */
+.logo a {
+    color: white; /* Set the color to white by default */
+    text-decoration: none; /* Remove the underline */
+    font-size: 24px; /* Adjust the font size if necessary */
+    font-weight: bold; /* Add bold to match the style */
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.logo a:hover {
+    color: green; /* Change color to green on hover */
+}
+
+/* Optional: Match hover style to the other navigation items */
+.main-nav a:hover, .popup-menu a:hover {
+    color: green; /* This should already be in place for your other menu items */
+}
+
+/* Menu icon and toggle styles */
+.menu-icon {
+    width: 24px;
+    height: 24px;
+  	padding-right: 35px;
+}
+
+.menu-toggle {
+    position: relative;
+    display: none;
+}
+
+.menu-toggle.active .menu-icon {
+    fill: #4CAF50;
+}
+
+.menu-toggle:hover .menu-icon {
+    fill: #4CAF50;
+}
+
+/* Popup Menu styles */
+.popup-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 0.5rem;
+    z-index: 1001;
+    width: 150px;
+}
+
+/* Popup Menu Items */
+.popup-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.popup-menu ul li {
+    border-bottom: 1px solid #ddd;
+}
+
+.popup-menu ul li:last-child {
+    border-bottom: none; 
+}
+
+.popup-menu ul li a {
+    display: block;
+    padding: 0.5rem;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.popup-menu ul li a:hover {
+    background-color: #f0f0f0;
+    color: #4CAF50;
+}
+
+/* Main navigation styles */
+.main-nav {
+    display: flex;
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.main-nav ul li {
+    margin: 0 1rem;
+}
+
+.main-nav ul li a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s;
+}
+
+.main-nav ul li a:hover {
+    color: #4CAF50;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .main-nav {
+        display: none;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .menu-toggle.active .popup-menu {
+        display: block;
+    }
+}
+
+/* Hero section */
+.hero {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5rem 2rem;
+    text-align: center;
+    width: 100%;
+    margin-top: 60px;
+    padding-top: 60px;
+    box-sizing: border-box;
+}
+
+.hero h1 {
+    font-size: 3rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+}
+
+/* About section */
+.about-section {
+    padding: 4rem 2rem;
+    background-color: #f0f0f0;
+    text-align: center;
+    font-size: 1.2em;
+    margin: 0 auto;
+    position: relative;
+}
+
+.about-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.about-section p {
+    font-size: 1.25rem;
+    color: #555;
+    display: inline-block; /* Keep it as inline-flex for alignment */
+    align-items: top; /* Align text to the top */
+	padding: 0px;
+  	margin: 0px;
+  	margin-bottom: 5px;
+    line-height: 1.5; /* Ensure consistent line height */
+}
+
+/* Wrapper for the rotating title and the period */
+.rotating-title-wrapper {
+    display: inline-flex;
+    align-items: center; /* Ensure cube and period are vertically aligned */
+}
+
+
+/* Cube container aligned inline with the text */
+.scene {
+    display: inline-block; /* Flexbox for better alignment */
+    justify-content: center; /* Center the cube in the scene */
+    align-items: center; /* Align cube vertically */
+    width: 190px; /* Adjust based on your cube size */
+    height: 30px; /* Reduce height to align better with text */
+    position: relative; /* Maintain positioning context */
+  	margin-left: 5px;
+  	margin-right: 2px;
+    margin-bottom: 5px;
+}
+
+.cube {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform-origin: 50% 50%; /* Center the rotation on the cube */
+    transition: transform 1s ease-in-out;
+}
+
+/* Cube faces */
+.cube-face {
+    position: absolute;
+    width: 100%; /* Match the cube's face */
+    height: 100%; /* Match the cube's face */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  	font-weight: bold;
+    font-size: 1.25rem;
+    color: #555;
+    background-color: #f0f0f0; /* Background color of the cube faces */
+    border: 1px solid #ddd; /* Add border for visibility */
+	/* opacity: 0.9; */
+}
+
+/* Cube face positions with correct translateZ */
+.cube-face.front {
+    transform: rotateX(0deg) translateZ(15px);
+}
+
+.cube-face.top {
+    transform: rotateX(90deg) translateZ(15px);
+}
+
+.cube-face.back {
+    transform: rotateX(180deg) translateZ(15px);
+}
+
+.cube-face.bottom {
+    transform: rotateX(270deg) translateZ(15px);
+}
+
+/* Adjust font size for smaller screens */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem; /* Reduce size for smaller screens */
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .projects-section h2,
+    .about-section h2,
+    .contact-section h2 {
+        font-size: 2rem;
+    }
+
+    .project-card h3 {
+        font-size: 1.25rem;
+    }
+
+    .project-card p,
+    .about-section p,
+    .contact-section p {
+        font-size: 1rem;
+    }
+  	
+    .scene {
+		width: 150px;
+    }
+  	
+  	.cube-face {
+    	font-size: 1rem;
+  	}
+}
+
+/* Projects section */
+.projects-section {
+    padding: 4rem 2rem;
+    background-color: white;
+    text-align: center;
+}
+
+.projects-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Projects grid and project card styles for larger screens */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Flexible columns that adjust to space */
+    gap: 3rem;
+    justify-content: center; /* Center the grid on the page */
+    padding-left: 15%;
+  	padding-right: 15%;
+    margin: 0 auto; /* Center the grid on the page */
+}
+
+.project-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s, width 0.3s; /* Transition width for smoother resizing */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  	height: 250px;
+    width: 100%; /* Let the width of the card fully adapt to grid space */
+    margin: 0 auto; /* Center each project card */
+}
+
+/* Responsive Design: Adjust styles for screens smaller than 768px */
+@media (max-width: 768px) {
+    .project-card {
+        max-width: 100%; /* Allow full width usage on smaller screens */
+    }
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.project-card h3 {
+    font-size: 1.5rem;
+}
+
+.project-card p {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    color: #666;
+}
+
+/* Contact section */
+.contact-section {
+    padding: 4rem 2rem;
+    text-align: center;
+    background-color: #fff;
+}
+
+.contact-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.contact-section p {
+    font-size: 1.25rem;
+}
+
+.contact-section a {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+/* Form styles */
+form {
+    margin-top: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+input, textarea {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    transition: border-color 0.3s;
+    font-family: Arial, sans-serif;
+}
+
+textarea {
+    height: 200px;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #999;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+}
+
+input.error, textarea.error {
+    border-color: red;
+}
+
+input:not(.error), textarea:not(.error) {
+    border-color: #ccc;
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+/* Normal state */
+#submitButton {
+    background-color: #4CAF50; /* Normal green */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+}
+
+/* Hover state */
+#submitButton:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: scale(1.02); /* Slight enlargement on hover */
+}
+
+/* Active/Clicked state */
+#submitButton:active {
+    background-color: #388e3c; /* Even darker green on click */
+    transform: scale(0.98); /* Slight shrink on click for feedback */
+}
+
+/* Overlay styles */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.popup p {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+#backButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+#backButton:hover {
+    background-color: #45a049;
+}
+
+.noscroll {
+    overflow: hidden;
+}
+
+#charCount {
+    text-align: right;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
