@@ -190,33 +190,100 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // =========================================================
-    // 5. MEDIA: load from mediaData.json (with logging + fallback)
+    // 5. MEDIA: load from mediaData.json
     // =========================================================
-    // structure: { "Category": { "Project": [ "path1", "path2", ... ] } }
     let mediaData = {};
-    // current index per card element
     const perCardIndex = new Map();
-    // which card opened the modal
     let gallerySourceCard = null;
 
+    // prefer images for cards
+    function firstDisplayableMedia(list) {
+        if (!list || !list.length) return null;
+        const img = list.find(src => !/\.(mp4|webm|ogg)$/i.test(src));
+        return img || list[0];
+    }
+
     fetch('mediaData.json')
-        .then(res => {
-            if (!res.ok) {
-                // e.g. 404
-                throw new Error('mediaData.json not found. HTTP ' + res.status);
-            }
-            return res.json();
+        .then(r => {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
         })
         .then(data => {
-            console.log('✅ Loaded mediaData.json', data);
+            console.log('✅ mediaData.json loaded', data);
             mediaData = data || {};
             initializeProjectCards();
         })
         .catch(err => {
             console.error('❌ Could not load mediaData.json. Falling back to placeholder.', err);
-            mediaData = {}; // empty -> cards will use placeholder
+            mediaData = {};
             initializeProjectCards();
         });
+
+    function initializeProjectCards() {
+        const cards = document.querySelectorAll('.project-card');
+        console.log('🎯 initializing cards with mediaData keys:', Object.keys(mediaData));
+
+        cards.forEach(card => {
+            const cat = card.dataset.category;
+            const proj = card.dataset.project;
+
+            let list =
+                mediaData[cat] && mediaData[cat][proj]
+                    ? mediaData[cat][proj]
+                    : ['Assets/no-media.png'];
+
+            // save current index for this card
+            perCardIndex.set(card, 0);
+
+            // put media on card
+            const img = card.querySelector('.project-media-img');
+            if (img) {
+                const first = firstDisplayableMedia(list);
+                if (first) img.src = first;
+            }
+
+            // set up arrows
+            updateCardArrows(card, 0, list.length);
+
+            const btnPrev = card.querySelector('.card-nav.left');
+            const btnNext = card.querySelector('.card-nav.right');
+
+            // prev
+            if (btnPrev) {
+                btnPrev.addEventListener('click', e => {
+                    e.stopPropagation();
+                    let idx = perCardIndex.get(card) || 0;
+                    if (idx > 0) {
+                        idx--;
+                        perCardIndex.set(card, idx);
+                        if (img) img.src = list[idx];
+                        updateCardArrows(card, idx, list.length);
+                    }
+                });
+            }
+
+            // next
+            if (btnNext) {
+                btnNext.addEventListener('click', e => {
+                    e.stopPropagation();
+                    let idx = perCardIndex.get(card) || 0;
+                    if (idx < list.length - 1) {
+                        idx++;
+                        perCardIndex.set(card, idx);
+                        if (img) img.src = list[idx];
+                        updateCardArrows(card, idx, list.length);
+                    }
+                });
+            }
+
+            // open modal
+            card.addEventListener('click', () => {
+                gallerySourceCard = card;
+                const startIndex = perCardIndex.get(card) || 0;
+                openGallery(proj, cat, list, startIndex);
+            });
+        });
+    }
 
     // =========================================================
     // 6. HELPER: update arrows on a single CARD
