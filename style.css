@@ -203,19 +203,50 @@ body {
 .about-section p {
     font-size: 1.25rem;
     color: #555;
-    display: inline-block;
-    align-items: top;
-    padding: 0px;
-    margin: 0px;
-    margin-bottom: 5px;
-    line-height: 1.5;
+    display: block;
+    margin: 0 0 1rem 0;      
+    line-height: 1.6;        
+    padding: 0;              
 }
+
+/* make the intro line + rotating titles sit on one line */
+.about-section .about-intro {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+}
+
+.about-section .rotating-title-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0;
+}
+
 
 /* Wrapper for the rotating title and the period */
 .rotating-title-wrapper {
     display: inline-flex;
     align-items: center;
 }
+
+.about-intro,
+.rotating-title-wrapper {
+    display: inline-flex;          /* allow them to sit side by side */
+    align-items: center;           /* vertically center text and cube */
+    gap: 0.4rem;                   /* small spacing between text and cube */
+    margin: 0;                     /* remove bottom spacing from <p> */
+    font-size: 1.25rem;            /* match your about-section font */
+}
+
+.about-section {
+    text-align: center;            /* keep it centered within section */
+}
+
+.about-intro strong {
+    font-weight: 700;
+}
+
 
 /* Cube container aligned inline with the text */
 .scene {
@@ -267,6 +298,129 @@ body {
 
 .cube-face.bottom {
     transform: rotateX(270deg) translateZ(15px);
+}
+
+/* Hero refinements */
+.hero .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.hero .hero-lead {
+    font-size: 1.35rem;
+    max-width: 52rem;
+    margin: 1.5rem auto 1.5rem auto;
+    line-height: 1.6;
+}
+
+.hero .hero-points {
+    display: inline-block;
+    text-align: left;
+    margin: 1rem auto 1.25rem auto;
+    background: rgba(255, 255, 255, 0.12);
+    padding: 1rem 1.4rem;
+    border-radius: 12px;
+    backdrop-filter: blur(2px);
+}
+
+.hero .hero-points p {
+    margin: 0.25rem 0;
+    font-size: 1.05rem;
+}
+
+.hero .hero-note {
+    opacity: 0.85;
+    margin-top: 1.25rem;
+    font-size: 0.95rem;
+}
+
+/* About refinements */
+.about-intro {
+    margin-bottom: 0.25rem;
+}
+
+.about-highlight {
+    max-width: 66rem;
+    margin: 2rem auto 2.5rem auto;
+    background: #fff;
+    padding: 1.25rem 1.25rem;
+    border-radius: 8px;
+    color: #444;
+    text-align: center; /* center the text */
+    justify-self: center;
+}
+
+.about-highlight p {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+/* 3 small text blocks under About */
+.about-grid {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto 2.5rem auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* always 3 on desktop */
+}
+
+/* when the screen is too narrow, go straight to 1 column */
+@media (max-width: 700px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.about-block {
+    background: #fff;
+    border-radius: 14px;
+    padding: 1.4rem 1.5rem 1.2rem 1.5rem;
+    text-align: left;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.02);
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+.about-block h3 {
+    margin-top: 0;
+    margin-bottom: 0.6rem;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.about-block p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: #555;
+}
+
+.about-outro {
+    max-width: 40rem;
+    margin: 0 auto;
+    font-weight: 500;
+    color: #444;
+}
+
+/* mobile tweaks */
+@media (max-width: 768px) {
+    .hero .hero-points {
+        display: block;
+        text-align: left;
+        width: 100%;
+    }
+
+    .about-highlight {
+        text-align: left;
+    }
+
+    .about-grid {
+        text-align: left;
+    }
 }
 
 /* Projects section */
@@ -608,7 +762,7 @@ body {
     }
 
     .scene {
-        width: 150px;
+        width: 200px;
     }
 
     .cube-face {

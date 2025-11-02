@@ -141,7 +141,6 @@ document.addEventListener('DOMContentLoaded', function () {
             "STEM Educator",
             "Robotics Instructor",
             "Project Coordinator",
-            "Creative Technologist"
         ];
 
         let titleIndex = 0;
