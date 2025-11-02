@@ -418,7 +418,6 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
     justify-content: center;
-    align-items: start;
     max-width: var(--page-max);
     margin: 0 auto;
 }
@@ -427,7 +426,7 @@ body {
 .project-card {
     width: 100%;
     max-width: 360px;
-    justify-self: center;
+    justify-self: start;
     background: var(--white);
     border-radius: var(--radius-lg);
     border: 1px solid rgba(0,0,0,0.04);
