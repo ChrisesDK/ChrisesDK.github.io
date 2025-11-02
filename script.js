@@ -87,33 +87,54 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // =========================================================
-    // 2. HAMBURGER MENU
+    // 2. NEW HAMBURGER MENU
     // =========================================================
-    const menuToggle = document.querySelector('.menu-toggle');
-    const popupMenu = document.querySelector('.popup-menu');
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-    if (menuToggle && popupMenu) {
-        menuToggle.addEventListener('click', function (event) {
-            menuToggle.classList.toggle('active');
-            popupMenu.style.display = menuToggle.classList.contains('active') ? 'block' : 'none';
+    if (hamburger && mobileMenu) {
+        function closeMenu() {
+            hamburger.classList.remove('is-open');
+            mobileMenu.classList.remove('is-open');
+            hamburger.setAttribute('aria-expanded', 'false');
+        }
+
+        function openMenu() {
+            hamburger.classList.add('is-open');
+            mobileMenu.classList.add('is-open');
+            hamburger.setAttribute('aria-expanded', 'true');
+        }
+
+        hamburger.addEventListener('click', function (event) {
             event.stopPropagation();
-        });
-
-        document.addEventListener('click', function (event) {
-            if (!menuToggle.contains(event.target) && !popupMenu.contains(event.target)) {
-                menuToggle.classList.remove('active');
-                popupMenu.style.display = 'none';
+            const isOpen = hamburger.classList.contains('is-open');
+            if (isOpen) {
+                closeMenu();
+            } else {
+                openMenu();
             }
         });
 
-        popupMenu.addEventListener('click', function (event) {
-            event.stopPropagation();
+        // close when clicking outside
+        document.addEventListener('click', function (event) {
+            const clickInsideBtn = hamburger.contains(event.target);
+            const clickInsideMenu = mobileMenu.contains(event.target);
+            if (!clickInsideBtn && !clickInsideMenu) {
+                closeMenu();
+            }
         });
 
-        popupMenu.querySelectorAll('a').forEach(menuItem => {
-            menuItem.addEventListener('click', function () {
-                menuToggle.classList.remove('active');
-                popupMenu.style.display = 'none';
+        // close on ESC
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeMenu();
+            }
+        });
+
+        // close when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function () {
+                closeMenu();
             });
         });
     }

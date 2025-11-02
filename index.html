@@ -13,18 +13,23 @@
             <div class="logo">
                 <a href="#hero">Portfolio</a>
             </div>
-            <div class="menu-toggle" id="menuToggle">
-                <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" viewBox="0 0 448 512">
-                    <path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/>
+
+            <!-- NEW hamburger -->
+            <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false">
+                <svg class="hamburger__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true" focusable="false">
+                    <path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
                 </svg>
-                <div class="popup-menu" id="popupMenu">
-                    <ul>
-                        <li><a href="#about">About Me</a></li>
-                        <li><a href="#projects">My Projects</a></li>
-                        <!-- <li><a href="#contact">Contact Me</a></li> -->
-                    </ul>
-                </div>
+            </button>
+
+            <!-- NEW mobile dropdown -->
+            <div class="mobile-menu" id="mobileMenu">
+                <ul>
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#projects">My Projects</a></li>
+                    <!-- <li><a href="#contact">Contact Me</a></li> -->
+                </ul>
             </div>
+
             <nav class="main-nav">
                 <ul>
                     <li><a href="#about">About Me</a></li>
@@ -64,10 +69,9 @@
                 <p>.</p>
             </div>
 
-            <div class="about-highlight"> 
+            <div class="about-highlight">
                 <p>
-                    I create interactive experiences where digital and physical worlds meet, often through
-                    <strong>Unity</strong>, <strong>LEGO SPIKE</strong>, and <strong>Raspberry Pi</strong>.
+                    I create interactive experiences where digital and physical worlds meet, often through <strong>Unity</strong>, <strong>LEGO SPIKE</strong>, and <strong>Raspberry Pi</strong>.
                 </p>
             </div>
 
@@ -87,7 +91,7 @@
                 <div class="about-block">
                     <h3>What drives me</h3>
                     <p>
-                        The moments where curiosity turns into creation. Whether it's a project of my own or the first robot built by a student of mine, the goal is the same: <strong>spark imagination</strong>.
+                        The moments where curiosity turns into creation. Whether it's a project of my own or the first robot built by a student of mine, the goal is the same: <strong>experiencing the spark of imagination</strong>.
                     </p>
                 </div>
             </div>
@@ -804,48 +808,8 @@
         <!--
         <!- Contact Section ->
         <section id="contact" class="contact-section">
-            <h2>Contact Me</h2>
-            <p>Feel free to reach out for any questions or opportunities.</p>
-
-            <form id="contactForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <input type="text" id="firstName" name="firstName" placeholder="First Name">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="lastName" name="lastName" placeholder="Last Name">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <input type="text" id="organization" name="organization" placeholder="Organization (optional)">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="email" name="email" placeholder="Email" size="30">
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <input type="text" id="subject" name="subject" placeholder="Subject">
-                </div>
-                
-                <div class="form-group">
-                    <textarea id="message" name="message" placeholder="Message (max 250 characters)"></textarea>
-                    <div id="charCount">0/250</div>
-                </div>
-                
-                <button id="submitButton" type="submit">Submit</button>
-            </form>
+            ...
         </section>
-        
-        <!- Popup Modal -> 
-        <div id="confirmationOverlay" class="overlay">
-            <div class="popup">
-                <p id="confirmationMessage"></p>
-                <button id="backButton">Close</button>
-            </div>
-        </div>
         -->
 
         <!-- Footer -->
