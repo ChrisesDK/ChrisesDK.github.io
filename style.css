@@ -666,7 +666,7 @@ body {
 /* disabled state */
 .is-disabled {
     opacity: .25;
-    pointer-events: none;
+    /*pointer-events: none;*/
     cursor: default;
 }
 
