@@ -151,9 +151,8 @@
   },
   "Hardware and Robotics": {
     "Escape Room": [
-      "Assets/Media/Hardware and Robotics/Escape Room/1.png",
-      "Assets/Media/Hardware and Robotics/Escape Room/2.mp4",
-      "Assets/Media/Hardware and Robotics/Escape Room/3.mp4"
+      "Assets/Media/Hardware and Robotics/Escape Room/1.mp4",
+      "Assets/Media/Hardware and Robotics/Escape Room/2.mp4"
     ],
     "Handheld Gaming Device": [
       "Assets/Media/Hardware and Robotics/Handheld Gaming Device/1.jpg",
@@ -165,11 +164,10 @@
       "Assets/Media/Hardware and Robotics/Handheld Gaming Device/7.jpg"
     ],
     "Motor Controller PCB": [
-      "Assets/Media/Hardware and Robotics/Motor Controller PCB/1.png",
-      "Assets/Media/Hardware and Robotics/Motor Controller PCB/2.mp4",
+      "Assets/Media/Hardware and Robotics/Motor Controller PCB/1.mp4",
+      "Assets/Media/Hardware and Robotics/Motor Controller PCB/2.png",
       "Assets/Media/Hardware and Robotics/Motor Controller PCB/3.png",
-      "Assets/Media/Hardware and Robotics/Motor Controller PCB/4.png",
-      "Assets/Media/Hardware and Robotics/Motor Controller PCB/5.png"
+      "Assets/Media/Hardware and Robotics/Motor Controller PCB/4.png"
     ],
     "Nerf Dart Turret": [
       "Assets/Media/Hardware and Robotics/Nerf Dart Turret/1.png",
@@ -179,12 +177,11 @@
       "Assets/Media/Hardware and Robotics/Nerf Dart Turret/5.png"
     ],
     "Omni-Directional Car": [
-      "Assets/Media/Hardware and Robotics/Omni-Directional Car/1.png",
+      "Assets/Media/Hardware and Robotics/Omni-Directional Car/1.mp4",
       "Assets/Media/Hardware and Robotics/Omni-Directional Car/2.mp4",
       "Assets/Media/Hardware and Robotics/Omni-Directional Car/3.mp4",
       "Assets/Media/Hardware and Robotics/Omni-Directional Car/4.mp4",
-      "Assets/Media/Hardware and Robotics/Omni-Directional Car/5.mp4",
-      "Assets/Media/Hardware and Robotics/Omni-Directional Car/6.mp4"
+      "Assets/Media/Hardware and Robotics/Omni-Directional Car/5.mp4"
     ],
     "Robot Controlled in Virtual Reality": [
       "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/1.jpg",
@@ -198,14 +195,12 @@
       "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/9.jpg"
     ],
     "Sun-Catcher": [
-      "Assets/Media/Hardware and Robotics/Sun-Catcher/1.png",
-      "Assets/Media/Hardware and Robotics/Sun-Catcher/2.mp4",
-      "Assets/Media/Hardware and Robotics/Sun-Catcher/3.png",
-      "Assets/Media/Hardware and Robotics/Sun-Catcher/4.jpg"
+      "Assets/Media/Hardware and Robotics/Sun-Catcher/1.mp4",
+      "Assets/Media/Hardware and Robotics/Sun-Catcher/2.png",
+      "Assets/Media/Hardware and Robotics/Sun-Catcher/3.jpg"
     ],
     "Toaster": [
-      "Assets/Media/Hardware and Robotics/Toaster/1.png",
-      "Assets/Media/Hardware and Robotics/Toaster/2.mp4"
+      "Assets/Media/Hardware and Robotics/Toaster/1.mp4"
     ]
   },
   "Lego Studio": {
@@ -877,13 +872,13 @@
       "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/3.mp4",
       "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/4.mp4"
     ],
-    "Teknologiskolen Instructor at Camp Autumn 2025": [
-      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Camp Autumn 2025/1.png",
-      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Camp Autumn 2025/2.png",
-      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Camp Autumn 2025/3.png",
-      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Camp Autumn 2025/4.jpg",
-      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Camp Autumn 2025/5.mp4",
-      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Camp Autumn 2025/6.mp4"
+    "Teknologiskolen Instructor at Autumn Camp 2025": [
+      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Autumn Camp 2025/1.png",
+      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Autumn Camp 2025/2.png",
+      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Autumn Camp 2025/3.png",
+      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Autumn Camp 2025/4.jpg",
+      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Autumn Camp 2025/5.mp4",
+      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Autumn Camp 2025/6.mp4"
     ],
     "Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025": [
       "Assets/Media/Teaching Design/Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025/1.png",

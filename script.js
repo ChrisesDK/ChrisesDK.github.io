@@ -16,10 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
             let isValid = true;
             const inputs = document.querySelectorAll('.form-group input:not(#organization), .form-group textarea');
 
-            // reset errors
             inputs.forEach(input => input.classList.remove('error'));
 
-            // validate
             inputs.forEach(input => {
                 if (input.id === 'email') {
                     if (!emailPattern.test(input.value)) {
@@ -67,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // character counter
     const messageField = document.getElementById('message');
     const charCount = document.getElementById('charCount');
     if (messageField && charCount) {
@@ -76,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // remove error when typing
     document.querySelectorAll('.form-group input, .form-group textarea').forEach(input => {
         input.addEventListener('input', function () {
             if (input.classList.contains('error')) {
@@ -91,33 +87,54 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // =========================================================
-    // 2. HAMBURGER MENU
+    // 2. NEW HAMBURGER MENU
     // =========================================================
-    const menuToggle = document.querySelector('.menu-toggle');
-    const popupMenu = document.querySelector('.popup-menu');
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-    if (menuToggle && popupMenu) {
-        menuToggle.addEventListener('click', function (event) {
-            menuToggle.classList.toggle('active');
-            popupMenu.style.display = menuToggle.classList.contains('active') ? 'block' : 'none';
+    if (hamburger && mobileMenu) {
+        function closeMenu() {
+            hamburger.classList.remove('is-open');
+            mobileMenu.classList.remove('is-open');
+            hamburger.setAttribute('aria-expanded', 'false');
+        }
+
+        function openMenu() {
+            hamburger.classList.add('is-open');
+            mobileMenu.classList.add('is-open');
+            hamburger.setAttribute('aria-expanded', 'true');
+        }
+
+        hamburger.addEventListener('click', function (event) {
             event.stopPropagation();
-        });
-
-        document.addEventListener('click', function (event) {
-            if (!menuToggle.contains(event.target) && !popupMenu.contains(event.target)) {
-                menuToggle.classList.remove('active');
-                popupMenu.style.display = 'none';
+            const isOpen = hamburger.classList.contains('is-open');
+            if (isOpen) {
+                closeMenu();
+            } else {
+                openMenu();
             }
         });
 
-        popupMenu.addEventListener('click', function (event) {
-            event.stopPropagation();
+        // close when clicking outside
+        document.addEventListener('click', function (event) {
+            const clickInsideBtn = hamburger.contains(event.target);
+            const clickInsideMenu = mobileMenu.contains(event.target);
+            if (!clickInsideBtn && !clickInsideMenu) {
+                closeMenu();
+            }
         });
 
-        popupMenu.querySelectorAll('a').forEach(menuItem => {
-            menuItem.addEventListener('click', function () {
-                menuToggle.classList.remove('active');
-                popupMenu.style.display = 'none';
+        // close on ESC
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeMenu();
+            }
+        });
+
+        // close when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function () {
+                closeMenu();
             });
         });
     }
@@ -141,7 +158,6 @@ document.addEventListener('DOMContentLoaded', function () {
             "STEM Educator",
             "Robotics Instructor",
             "Project Coordinator",
-            "Creative Technologist"
         ];
 
         let titleIndex = 0;
@@ -195,11 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
             tab.setAttribute('aria-current', 'page');
 
             projectCategories.forEach(cat => {
-                if (cat.id === targetId) {
-                    cat.classList.add('active');
-                } else {
-                    cat.classList.remove('active');
-                }
+                cat.classList.toggle('active', cat.id === targetId);
             });
         });
     });
@@ -207,19 +219,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // =========================================================
     // 5. MEDIA GALLERY + CARDS
     // =========================================================
-    // structure of mediaData.json:
-    // {
-    //   "Game Development": {
-    //       "Ducky Pond": ["Assets/Media/Game Development/Ducky Pond/1.png", "....mp4", ...],
-    //       ...
-    //   },
-    //   ...
-    // }
     let mediaData = {};
     const perCardIndex = new Map();
     let gallerySourceCard = null;
 
-    // modal elements
     const galleryModal = document.getElementById('galleryModal');
     const galleryClose = document.getElementById('galleryClose');
     const galleryTitle = document.getElementById('galleryTitle');
@@ -235,44 +238,27 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentGalleryMedia = [];
     let currentGalleryIndex = 0;
 
-    // helper: is video?
     function isVideoSrc(src) {
         return src && /\.(mp4|webm|ogg)$/i.test(src);
     }
 
-    // helper: show media on CARD
     function showMediaOnCard(card, src) {
         const imgEl = card.querySelector('.project-media-img');
         const vidEl = card.querySelector('.project-media-video');
         const video = isVideoSrc(src);
 
         if (video) {
-            // hide image
-            if (imgEl) {
-                imgEl.style.display = 'none';
-            }
-            // show video
+            if (imgEl) imgEl.style.display = 'none';
             if (vidEl) {
                 vidEl.style.display = 'block';
-                if (vidEl.src !== src) {
-                    vidEl.src = src;
-                }
-                // don't autoplay aggressively, just set to first frame
-                try {
-                    vidEl.load();
-                } catch (e) {}
-            } else if (imgEl) {
-                // fallback if no video element in HTML (but we added it)
-                imgEl.style.display = 'block';
-                imgEl.src = src;
+                if (vidEl.src !== src) vidEl.src = src;
+                try { vidEl.load(); } catch (e) {}
             }
         } else {
-            // show image
             if (imgEl) {
                 imgEl.style.display = 'block';
                 imgEl.src = src;
             }
-            // hide video
             if (vidEl) {
                 vidEl.pause();
                 vidEl.style.display = 'none';
@@ -281,125 +267,73 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // helper: update arrows on CARD
     function updateCardArrows(card, currentIndex, mediaLength) {
         const btnPrev = card.querySelector('.card-nav.left');
         const btnNext = card.querySelector('.card-nav.right');
         if (!btnPrev || !btnNext) return;
 
-        if (currentIndex <= 0) {
-            btnPrev.classList.add('is-disabled');
-        } else {
-            btnPrev.classList.remove('is-disabled');
-        }
-
-        if (currentIndex >= mediaLength - 1) {
-            btnNext.classList.add('is-disabled');
-        } else {
-            btnNext.classList.remove('is-disabled');
-        }
+        btnPrev.classList.toggle('is-disabled', currentIndex <= 0);
+        btnNext.classList.toggle('is-disabled', currentIndex >= mediaLength - 1);
     }
 
-    // helper: update arrows on MODAL
     function updateGalleryArrows() {
         if (!galleryPrev || !galleryNext) return;
-
-        if (currentGalleryIndex <= 0) {
-            galleryPrev.classList.add('is-disabled');
-        } else {
-            galleryPrev.classList.remove('is-disabled');
-        }
-
-        if (currentGalleryIndex >= currentGalleryMedia.length - 1) {
-            galleryNext.classList.add('is-disabled');
-        } else {
-            galleryNext.classList.remove('is-disabled');
-        }
+        galleryPrev.classList.toggle('is-disabled', currentGalleryIndex <= 0);
+        galleryNext.classList.toggle('is-disabled', currentGalleryIndex >= currentGalleryMedia.length - 1);
     }
 
-    // fetch mediaData.json
     fetch('mediaData.json')
         .then(res => {
-            if (!res.ok) {
-                throw new Error('mediaData.json not found. HTTP ' + res.status);
-            }
+            if (!res.ok) throw new Error('mediaData.json not found. HTTP ' + res.status);
             return res.json();
         })
         .then(data => {
-            console.log('✅ mediaData.json loaded', data);
             mediaData = data || {};
             initializeProjectCards();
         })
         .catch(err => {
-            console.error('❌ Could not load mediaData.json. Falling back to placeholder.', err);
+            console.error('❌ Could not load mediaData.json:', err);
             mediaData = {};
             initializeProjectCards();
         });
 
-    // initialize cards after media is loaded
     function initializeProjectCards() {
         const cards = document.querySelectorAll('.project-card');
 
         cards.forEach(card => {
             const categoryName = card.dataset.category;
             const projectName = card.dataset.project;
+            const mediaList = (mediaData[categoryName]?.[projectName]) || ['Assets/no-media.png'];
 
-            let mediaList = [];
-            if (
-                categoryName &&
-                projectName &&
-                mediaData[categoryName] &&
-                mediaData[categoryName][projectName]
-            ) {
-                mediaList = mediaData[categoryName][projectName];
-            } else {
-                mediaList = ['Assets/no-media.png'];
-            }
-
-            // start at index 0
             perCardIndex.set(card, 0);
-
-            // put first media on card
-            const first = mediaList[0];
-            if (first) {
-                showMediaOnCard(card, first);
-            }
-
-            // set arrows
+            showMediaOnCard(card, mediaList[0]);
             updateCardArrows(card, 0, mediaList.length);
 
             const btnPrev = card.querySelector('.card-nav.left');
             const btnNext = card.querySelector('.card-nav.right');
 
-            // prev
             if (btnPrev) {
                 btnPrev.addEventListener('click', (e) => {
                     e.stopPropagation();
                     let idx = perCardIndex.get(card) || 0;
-                    if (idx > 0) {
-                        idx -= 1;
-                        perCardIndex.set(card, idx);
-                        showMediaOnCard(card, mediaList[idx]);
-                        updateCardArrows(card, idx, mediaList.length);
-                    }
+                    if (idx > 0) idx -= 1;
+                    perCardIndex.set(card, idx);
+                    showMediaOnCard(card, mediaList[idx]);
+                    updateCardArrows(card, idx, mediaList.length);
                 });
             }
 
-            // next
             if (btnNext) {
                 btnNext.addEventListener('click', (e) => {
                     e.stopPropagation();
                     let idx = perCardIndex.get(card) || 0;
-                    if (idx < mediaList.length - 1) {
-                        idx += 1;
-                        perCardIndex.set(card, idx);
-                        showMediaOnCard(card, mediaList[idx]);
-                        updateCardArrows(card, idx, mediaList.length);
-                    }
+                    if (idx < mediaList.length - 1) idx += 1;
+                    perCardIndex.set(card, idx);
+                    showMediaOnCard(card, mediaList[idx]);
+                    updateCardArrows(card, idx, mediaList.length);
                 });
             }
 
-            // click card -> open gallery
             card.addEventListener('click', () => {
                 const startIndex = perCardIndex.get(card) || 0;
                 gallerySourceCard = card;
@@ -408,46 +342,55 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // open gallery
     function openGallery(projectName, categoryName, mediaList, startIndex = 0) {
         currentGalleryMedia = mediaList;
         currentGalleryIndex = Math.min(Math.max(startIndex, 0), mediaList.length - 1);
 
-        if (galleryTitle) galleryTitle.textContent = projectName || 'Project';
-        if (gallerySubtitle) gallerySubtitle.textContent = categoryName || '';
+        galleryTitle.textContent = projectName || 'Project';
+        gallerySubtitle.textContent = categoryName || '';
 
         showGalleryMedia(currentGalleryIndex);
 
-        if (galleryModal) {
-            galleryModal.classList.add('open');
-            document.body.classList.add('noscroll');
-        }
+        galleryModal.classList.add('open');
+        document.body.classList.add('noscroll');
     }
 
-    // close gallery
     function closeGallery() {
-        if (galleryModal) {
-            galleryModal.classList.remove('open');
-            document.body.classList.remove('noscroll');
-        }
-        if (galleryVideo) {
-            galleryVideo.pause();
-        }
+        galleryModal.classList.remove('open');
+        document.body.classList.remove('noscroll');
+        if (galleryVideo) galleryVideo.pause(); // ✅ pause on close
         gallerySourceCard = null;
     }
 
-    // show media in modal (and sync to card)
+    // =========================================================
+    // ✨ MODIFIED: Autoplay video in modal, pause old one
+    // =========================================================
     function showGalleryMedia(index) {
         const src = currentGalleryMedia[index];
         const video = isVideoSrc(src);
 
+        // Always stop any currently playing video first
+        if (galleryVideo) galleryVideo.pause();
+
         if (video) {
             if (galleryVideo) {
                 galleryVideo.style.display = 'block';
+
                 if (galleryVideo.src !== src) {
                     galleryVideo.src = src;
                 }
+
+                // allow autoplay (muted & inline)
+                galleryVideo.muted = true;
+                galleryVideo.playsInline = true;
+
+                // attempt to autoplay
+                const playPromise = galleryVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(err => console.log("Autoplay blocked:", err));
+                }
             }
+
             if (galleryImage) galleryImage.style.display = 'none';
             if (galleryPlaceholder) galleryPlaceholder.style.display = 'none';
         } else if (src) {
@@ -471,14 +414,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const total = currentGalleryMedia.length;
         const current = index + 1;
-        if (galleryCounter) {
-            galleryCounter.textContent = current + ' / ' + total;
-        }
-        if (galleryProgressBar) {
-            galleryProgressBar.style.width = (current / total) * 100 + '%';
-        }
+        galleryCounter.textContent = `${current} / ${total}`;
+        galleryProgressBar.style.width = (current / total) * 100 + '%';
 
-        // sync back to card that opened it
         if (gallerySourceCard) {
             perCardIndex.set(gallerySourceCard, index);
             showMediaOnCard(gallerySourceCard, src);
@@ -488,7 +426,9 @@ document.addEventListener('DOMContentLoaded', function () {
         updateGalleryArrows();
     }
 
-    // modal nav
+    // =========================================================
+    // MODAL NAVIGATION
+    // =========================================================
     if (galleryPrev) {
         galleryPrev.addEventListener('click', () => {
             if (currentGalleryIndex > 0) {
@@ -519,9 +459,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // keyboard nav
     document.addEventListener('keydown', (e) => {
-        const isOpen = galleryModal && galleryModal.classList.contains('open');
+        const isOpen = galleryModal.classList.contains('open');
         if (!isOpen) return;
 
         if (e.key === 'Escape') {

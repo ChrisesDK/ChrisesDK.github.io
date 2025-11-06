@@ -1,837 +1,830 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="icon" href="Assets/Icons/frog2.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Top Navigation Bar -->
-    <header class="topbar">
-        <div class="logo">
-            <a href="#hero">Portfolio</a>
-        </div>
-        <div class="menu-toggle" id="menuToggle">
-            <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" viewBox="0 0 448 512">
-                <path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/>
-            </svg>
-            <div class="popup-menu" id="popupMenu">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Portfolio</title>
+        <link rel="icon" href="Assets/Icons/frog2.ico" type="image/x-icon">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <!-- Top Navigation Bar -->
+        <header class="topbar">
+            <div class="logo">
+                <a href="#hero">Portfolio</a>
+            </div>
+
+            <!-- NEW hamburger -->
+            <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false">
+                <svg class="hamburger__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true" focusable="false">
+                    <path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
+                </svg>
+            </button>
+
+            <!-- NEW mobile dropdown -->
+            <div class="mobile-menu" id="mobileMenu">
                 <ul>
                     <li><a href="#about">About Me</a></li>
                     <li><a href="#projects">My Projects</a></li>
-                    <li><a href="#contact">Contact Me</a></li>
+                    <!-- <li><a href="#contact">Contact Me</a></li> -->
                 </ul>
             </div>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#projects">My Projects</a></li>
+                    <!--<li><a href="#contact">Contact Me</a></li>-->
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <h1>Welcome to My Portfolio</h1>
+
+            <p class="hero-lead">
+                I'm a designer and developer exploring where <strong>play</strong>, <strong>learning</strong>, and <strong>technology</strong> meet.
+            </p>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="about-section">
+            <h2>About Me</h2>
+
+            <p class="about-intro">
+                My name is <strong>Christian Rasmussen</strong>,
+            </p>
+
+            <div class="rotating-title-wrapper">
+                <p>and I am a</p>
+                <div class="scene">
+                    <div class="cube">
+                        <div class="cube-face front">Software Engineer</div>
+                        <div class="cube-face top">Game Developer</div>
+                        <div class="cube-face back">Game Designer</div>
+                        <div class="cube-face bottom">Interaction Designer</div>
+                    </div>
+                </div>
+                <p>.</p>
+            </div>
+
+            <div class="about-highlight">
+                <p>
+                    I create interactive experiences where digital and physical worlds meet, often through <strong>Unity</strong>, <strong>LEGO SPIKE</strong>, and <strong>Raspberry Pi</strong>.
+                </p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-block">
+                    <h3>What I work on</h3>
+                    <p>
+                        Mixed reality simulations for learning, playful robotics workshops, and game-like interactions that make technology feel approachable.
+                    </p>
+                </div>
+                <div class="about-block">
+                    <h3>Who it's for</h3>
+                    <p>
+                        Kids, learners, and people who explore best by doing, especially in educational or creative settings.
+                    </p>
+                </div>
+                <div class="about-block">
+                    <h3>What drives me</h3>
+                    <p>
+                        The moments where curiosity turns into creation. Whether it's a project of my own or the first robot built by a student of mine, the goal is the same: <strong>experiencing the spark of imagination</strong>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <h2>My Projects</h2>
+
+            <!-- Category Tabs -->
+            <div class="project-tabs" aria-label="Project categories">
+                <button class="project-tab active" data-target="cat-game">Game Development</button>
+                <button class="project-tab" data-target="cat-app">App Development</button>
+                <button class="project-tab" data-target="cat-hardware">Hardware and Robotics</button>
+                <button class="project-tab" data-target="cat-lego">Lego Studio</button>
+                <button class="project-tab" data-target="cat-teaching">Teaching Design</button>
+            </div>
+
+            <!-- Categories wrapper -->
+            <div class="project-categories">
+
+                <!-- ================= GAME DEVELOPMENT ================= -->
+                <div class="project-category active" id="cat-game" aria-label="Game Development projects">
+                    <div class="projects-grid">
+
+                        <!-- Bachelor Project -->
+                        <article class="project-card"
+                                data-project="Bachelor Project"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Bachelor Project</h3>
+                                <p>Virtual Rudder Service and Catastrophy training at sea, with AR to VR onboarding.</p>
+                            </div>
+                        </article>
+
+                        <!-- ErhvervsTankens Skov og Naturtekniker -->
+                        <article class="project-card"
+                                data-project="ErhvervsTankens Skov og Naturtekniker"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>ErhvervsTankens Skov og Naturtekniker</h3>
+                                <p>Virtual vocational education and training experience.</p>
+                            </div>
+                        </article>
+
+                        <!-- ErhvervsTankens Elektriker og VVS -->
+                        <article class="project-card"
+                                data-project="ErhvervsTankens Elektriker og VVS"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>ErhvervsTankens Elektriker og VVS</h3>
+                                <p>Virtual vocational education and training experience.</p>
+                            </div>
+                        </article>
+                        
+                        <!-- ErhvervsTankens SOSU DigiTech Assistent -->
+                        <article class="project-card"
+                            data-project="ErhvervsTankens SOSU DigiTech Assistent"
+                            data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>ErhvervsTankens SOSU DigiTech Assistent</h3>
+                                <p>Virtual vocational education and training experience.</p>
+                            </div>
+                        </article>
+                        
+                        <!-- ErhvervsTankens Automatiktekniker -->
+                        <article class="project-card"
+                                data-project="ErhvervsTankens Automatiktekniker"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>ErhvervsTankens Automatiktekniker</h3>
+                                <p>Virtual vocational education and training experience.</p>
+                            </div>
+                        </article>
+
+                        <!-- Maelstorm -->
+                        <article class="project-card"
+                                data-project="Maelstorm"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Maelstorm</h3>
+                                <p>Passion project of a post apocalyptic shattered world where electricity doesn't work, but is replaced by floating energy crystals, and utilized to tie the world back together again.</p>
+                            </div>
+                        </article>
+
+                        <!-- Maelstorm Bean Bandits -->
+                        <article class="project-card"
+                                data-project="Maelstorm Bean Bandits"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Maelstorm Bean Bandits</h3>
+                                <p>Scenario - Play as pirates, inside the maelstorm, stealing and securing loot from crashed cargo ships. (Online Multiplayer)</p>
+                            </div>
+                        </article>
+
+                        <!-- Poly Copter -->
+                        <article class="project-card"
+                                data-project="Poly Copter"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Poly Copter</h3>
+                                <p>VR helicopter experience.</p>
+                            </div>
+                        </article>
+
+                        <!-- Construction Site Wrecker -->
+                        <article class="project-card"
+                                data-project="Construction Site Wrecker"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Construction Site Wrecker</h3>
+                                <p>VR experience of a crane operator, taking revenge, after getting fired to "cut cost".</p>
+                            </div>
+                        </article>
+                        
+                        <!-- Poly Rally -->
+                        <article class="project-card"
+                                data-project="Poly Rally"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Poly Rally</h3>
+                                <p>Race for the fastest time, on premade or custom made tracks.</p>
+                            </div>
+                        </article>
+
+                        <!-- Infinite Roll a Ball Platformer -->
+                        <article class="project-card"
+                                data-project="Infinite Roll a Ball Platformer"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Infinite Roll a Ball Platformer</h3>
+                                <p>Roll/Jump/Climb Endlessly.</p>
+                            </div>
+                        </article>
+
+                        <!-- Ducky Pond -->
+                        <article class="project-card"
+                                data-project="Ducky Pond"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Ducky Pond</h3>
+                                <p>Survive the shallows, by avoiding predators and not being the largest duck flock. (Local Multiplayer)</p>
+                            </div>
+                        </article>
+
+                        <!-- Sheepy Ranch -->
+                        <article class="project-card"
+                                data-project="Sheepy Ranch"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Sheepy Ranch</h3>
+                                <p>Satisfy a dark demon through sacrificial rituals or face it head on.</p>
+                            </div>
+                        </article>
+
+                        <!-- Skate Game Go WEE -->
+                        <article class="project-card"
+                                data-project="Skate Game Go WEE"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Skate Game Go WEE</h3>
+                                <p>Go fast, dont fall.</p>
+                            </div>
+                        </article>
+
+                        <!-- Poly Planes -->
+                        <article class="project-card"
+                                data-project="Poly Planes"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Poly Planes</h3>
+                                <p>Fast paced acrobatic airborne free-for-all.</p>
+                            </div>
+                        </article>
+                        
+                        <!-- Cookie Dunker -->
+                        <article class="project-card"
+                                data-project="Cookie Dunker"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Cookie Dunker</h3>
+                                <p>Save christmas by dunking the most cookies in your santas milk. (Local Multiplayer)</p>
+                            </div>
+                        </article>
+
+                        <!-- Misc -->
+                        <article class="project-card"
+                                data-project="Misc"
+                                data-category="Game Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Misc</h3>
+                                <p>Collection of noteworthy, shelved projects.</p>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+
+                <!-- ================= APP DEVELOPMENT ================= -->
+                <div class="project-category" id="cat-app" aria-label="App Development projects">
+                    <div class="projects-grid">
+
+                        <!-- Wireless BLE Controller -->
+                        <article class="project-card"
+                                data-project="Wireless BLE Controller of Raspberry Pi Pico W"
+                                data-category="App Development">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Wireless BLE Controller of Raspberry Pi Pico W</h3>
+                                <p>BLE-based controller built in Unity for Raspberry Pi Pico W.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- ============ HARDWARE AND ROBOTICS ============ -->
+                <div class="project-category" id="cat-hardware" aria-label="Hardware and Robotics projects">
+                    <div class="projects-grid">
+                        
+                        <!-- Handheld Gaming Device -->
+                        <article class="project-card"
+                                data-project="Handheld Gaming Device"
+                                data-category="Hardware and Robotics">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Handheld Gaming Device</h3>
+                                <p>Custom built for emulating retro video games.</p>
+                            </div>
+                        </article>
+
+                        <!-- Nerf Dart Turret -->
+                        <article class="project-card"
+                                data-project="Nerf Dart Turret"
+                                data-category="Hardware and Robotics">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Nerf Dart Turret</h3>
+                                <p>Launches nerf darts, either autonomously or remote controlled.</p>
+                            </div>
+                        </article>
+
+                        <!-- Omni-Directional Car -->
+                        <article class="project-card"
+                                data-project="Omni-Directional Car"
+                                data-category="Hardware and Robotics">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Omni-Directional Car</h3>
+                                <p>Gyroscopic & Compass based controller.</p>
+                            </div>
+                        </article>
+
+                        <!-- Robot Controlled in Virtual Reality -->
+                        <article class="project-card"
+                                data-project="Robot Controlled in Virtual Reality"
+                                data-category="Hardware and Robotics">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Robot Controlled in Virtual Reality</h3>
+                                <p>VR experience, simulating controlling a 'drone' on Earth from Mars.</p>
+                            </div>
+                        </article>
+
+                        <!-- Sun-Catcher -->
+                        <article class="project-card"
+                                data-project="Sun-Catcher"
+                                data-category="Hardware and Robotics">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Sun-Catcher</h3>
+                                <p>Solar panel with sun/light tracking.</p>
+                            </div>
+                        </article>
+
+                        <!-- Escape Room -->
+                        <article class="project-card"
+                                data-project="Escape Room"
+                                data-category="Hardware and Robotics">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Escape Room</h3>
+                                <p>Controller for detecting when the inputted code (from clues) are correct.</p>
+                            </div>
+                        </article>
+
+                        <!-- Motor Controller PCB -->
+                        <article class="project-card"
+                                data-project="Motor Controller PCB"
+                                data-category="Hardware and Robotics">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Motor Controller</h3>
+                                <p>Custom H-Bridge PCB.</p>
+                            </div>
+                        </article>
+
+                        <!-- Toaster -->
+                        <article class="project-card"
+                                data-project="Toaster"
+                                data-category="Hardware and Robotics">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Toaster</h3>
+                                <p>Embedded timer.</p>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+
+                <!-- ================= LEGO STUDIO ================= -->
+                <div class="project-category" id="cat-lego" aria-label="Lego Studio projects">
+                    <div class="projects-grid">
+
+                        <article class="project-card" data-project="Nano Hogwarts Legacy" data-category="Lego Studio">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Nano Hogwarts Legacy</h3>
+                                <p>Custom Design</p>
+                            </div>
+                        </article>
+
+                        <article class="project-card" data-project="Robot Arm Stor" data-category="Lego Studio">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Advanced Robot Arm</h3>
+                                <p>Custom instructions for public design</p>
+                            </div>
+                        </article>
+
+                        <article class="project-card" data-project="Danse-Krabbe" data-category="Lego Studio">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Dancing Crab</h3>
+                                <p>Custom instructions for public design</p>
+                            </div>
+                        </article>
+
+                        <article class="project-card" data-project="Farvesorteringsmaskine Avanceret" data-category="Lego Studio">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Advanced Color Sorter</h3>
+                                <p>Custom instructions for public design</p>
+                            </div>
+                        </article>
+
+                        <article class="project-card" data-project="Gaffeltruck" data-category="Lego Studio">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Forklift</h3>
+                                <p>Custom instructions for public design</p>
+                            </div>
+                        </article>
+
+                        <article class="project-card" data-project="Guitar" data-category="Lego Studio">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Guitar</h3>
+                                <p>Custom instructions for public design</p>
+                            </div>
+                        </article>
+
+                        <article class="project-card" data-project="Kortdeler" data-category="Lego Studio">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Card Dealer</h3>
+                                <p>Custom instructions for public design</p>
+                            </div>
+                        </article>
+
+                        <article class="project-card" data-project="Rul-Bot" data-category="Lego Studio">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Roll-Bot</h3>
+                                <p>Custom instructions for public design</p>
+                            </div>
+                        </article>
+
+                    </div>
+                </div>
+
+                <!-- =============== TEACHING DESIGN =============== -->
+                <div class="project-category" id="cat-teaching" aria-label="Teaching Design projects">
+                    <div class="projects-grid">
+                        <article class="project-card"
+                                data-project="ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025"
+                                data-category="Teaching Design">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>ErhvervsTanken</h3>
+                                <p>Instructor at Lego Spike Weekly Workshop 2024-2025.</p>
+                            </div>
+                        </article>
+
+                        <article class="project-card"
+                                data-project="Teknologiskolen Instructor at Autumn Camp 2025"
+                                data-category="Teaching Design">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Teknologiskolen</h3>
+                                <p>Instructor at Autumn Camp 2025.</p>
+                            </div>
+                        </article>
+
+                        <article class="project-card"
+                                data-project="Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025"
+                                data-category="Teaching Design">
+                            <div class="project-media">
+                                <button class="card-nav left" aria-label="Previous media">&#10094;</button>
+                                <div class="project-media-inner">
+                                    <img alt="" class="project-media-img">
+                                    <video class="project-media-video" muted playsinline style="display:none;"></video>
+                                </div>
+                                <button class="card-nav right" aria-label="Next media">&#10095;</button>
+                            </div>
+                            <div class="project-card-body">
+                                <h3>Teknologiskolen</h3>
+                                <p>Instructor at Lego Spike Weekly Workshop 2025.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- GALLERY MODAL -->
+        <div class="gallery-modal" id="galleryModal" aria-modal="true" role="dialog" aria-label="Project media viewer">
+            <div class="gallery-dialog">
+                <button class="gallery-close" id="galleryClose" aria-label="Close media viewer">&times;</button>
+                <header class="gallery-header">
+                    <h3 class="gallery-title" id="galleryTitle">Project title</h3>
+                    <p class="gallery-subtitle" id="gallerySubtitle">Category</p>
+                </header>
+                <div class="gallery-main">
+                    <img id="galleryImage" class="gallery-media" alt="" style="display:none;">
+                    <video id="galleryVideo" class="gallery-media" controls style="display:none;"></video>
+                    <div class="gallery-placeholder" id="galleryPlaceholder">
+                        <p>Media goes here</p>
+                    </div>
+                    <button class="gallery-nav left" id="galleryPrev" aria-label="Previous media">&#10094;</button>
+                    <button class="gallery-nav right" id="galleryNext" aria-label="Next media">&#10095;</button>
+                </div>
+                <footer class="gallery-footer">
+                    <div class="gallery-progress" aria-label="Media progress">
+                        <div class="gallery-progress-bar" id="galleryProgressBar"></div>
+                    </div>
+                    <span id="galleryCounter" class="gallery-counter-text">1 / 1</span>
+                </footer>
+            </div>
         </div>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="#about">About Me</a></li>
-                <li><a href="#projects">My Projects</a></li>
-                <li><a href="#contact">Contact Me</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <h1>Welcome to My Portfolio</h1>
-        <p>Here you'll find a collection of my projects and experiences.</p>
-    </section>
+        <!--
+        <!- Contact Section ->
+        <section id="contact" class="contact-section">
+            ...
+        </section>
+        -->
 
-    <!-- About Me Section -->
-    <section id="about" class="about-section">
-        <h2>About Me</h2>
-        <p>My name is Christian Rasmussen,</p>
-        <div class="rotating-title-wrapper">
-            <p>and I am a</p>
-            <div class="scene">
-                <div class="cube">
-                    <div class="cube-face front">Software Engineer</div>
-                    <div class="cube-face top">Game Developer</div>
-                    <div class="cube-face back">Game Designer</div>
-                    <div class="cube-face bottom">Interaction Designer</div>
-                </div>
-            </div>
-            <p>.</p>
-        </div>
-    </section>
+        <!-- Footer -->
+        <footer>
+            <p>My Portfolio 2025 - Christian Rasmussen</p>
+        </footer>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects-section">
-        <h2>My Projects</h2>
-
-        <!-- Category Tabs -->
-        <div class="project-tabs" aria-label="Project categories">
-            <button class="project-tab active" data-target="cat-game">Game Development</button>
-            <button class="project-tab" data-target="cat-app">App Development</button>
-            <button class="project-tab" data-target="cat-hardware">Hardware and Robotics</button>
-            <button class="project-tab" data-target="cat-lego">Lego Studio</button>
-            <button class="project-tab" data-target="cat-teaching">Teaching Design</button>
-        </div>
-
-        <!-- Categories wrapper -->
-        <div class="project-categories">
-
-            <!-- ================= GAME DEVELOPMENT ================= -->
-            <div class="project-category active" id="cat-game" aria-label="Game Development projects">
-                <div class="projects-grid">
-
-                    <!-- Bachelor Project -->
-                    <article class="project-card"
-                             data-project="Bachelor Project"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Bachelor Project</h3>
-                            <p>Simulation / training oriented.</p>
-                        </div>
-                    </article>
-
-                    <!-- Construction Site Wrecker -->
-                    <article class="project-card"
-                             data-project="Construction Site Wrecker"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Construction Site Wrecker</h3>
-                            <p>VR / construction interaction.</p>
-                        </div>
-                    </article>
-
-                    <!-- Cookie Dunker -->
-                    <article class="project-card"
-                             data-project="Cookie Dunker"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Cookie Dunker</h3>
-                            <p>Casual mechanic prototype.</p>
-                        </div>
-                    </article>
-
-                    <!-- Ducky Pond -->
-                    <article class="project-card"
-                             data-project="Ducky Pond"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Ducky Pond</h3>
-                            <p>Small casual project.</p>
-                        </div>
-                    </article>
-
-                    <!-- ErhvervsTankens Automatiktekniker -->
-                    <article class="project-card"
-                             data-project="ErhvervsTankens Automatiktekniker"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>ErhvervsTankens Automatiktekniker</h3>
-                            <p>Conceptual vocational scenario.</p>
-                        </div>
-                    </article>
-
-                    <!-- ErhvervsTankens Elektriker og VVS -->
-                    <article class="project-card"
-                             data-project="ErhvervsTankens Elektriker og VVS"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>ErhvervsTankens Elektriker og VVS</h3>
-                            <p>Vocational training scenarios.</p>
-                        </div>
-                    </article>
-
-                    <!-- ErhvervsTankens Skov og Naturtekniker -->
-                    <article class="project-card"
-                             data-project="ErhvervsTankens Skov og Naturtekniker"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>ErhvervsTankens Skov og Naturtekniker</h3>
-                            <p>Educational game content.</p>
-                        </div>
-                    </article>
-
-                    <!-- ErhvervsTankens SOSU DigiTech Assistent -->
-                    <article class="project-card"
-                             data-project="ErhvervsTankens SOSU DigiTech Assistent"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>ErhvervsTankens SOSU DigiTech Assistent</h3>
-                            <p>Assistive / vocational.</p>
-                        </div>
-                    </article>
-
-                    <!-- Infinite Roll a Ball Platformer -->
-                    <article class="project-card"
-                             data-project="Infinite Roll a Ball Platformer"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Infinite Roll a Ball Platformer</h3>
-                            <p>Endless rolling prototype.</p>
-                        </div>
-                    </article>
-
-                    <!-- Maelstorm -->
-                    <article class="project-card"
-                             data-project="Maelstorm"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Maelstorm</h3>
-                            <p>Game project.</p>
-                        </div>
-                    </article>
-
-                    <!-- Maelstorm Bean Bandits -->
-                    <article class="project-card"
-                             data-project="Maelstorm Bean Bandits"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Maelstorm Bean Bandits</h3>
-                            <p>Spin-off / variant.</p>
-                        </div>
-                    </article>
-
-                    <!-- Poly Copter -->
-                    <article class="project-card"
-                             data-project="Poly Copter"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Poly Copter</h3>
-                            <p>Heli / drone style.</p>
-                        </div>
-                    </article>
-
-                    <!-- Poly Planes -->
-                    <article class="project-card"
-                             data-project="Poly Planes"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Poly Planes</h3>
-                            <p>Low poly aviation concept.</p>
-                        </div>
-                    </article>
-
-                    <!-- Poly Rally -->
-                    <article class="project-card"
-                             data-project="Poly Rally"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Poly Rally</h3>
-                            <p>Racing prototype.</p>
-                        </div>
-                    </article>
-
-                    <!-- Sheepy Ranch -->
-                    <article class="project-card"
-                             data-project="Sheepy Ranch"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Sheepy Ranch</h3>
-                            <p>Casual farming.</p>
-                        </div>
-                    </article>
-
-                    <!-- Skate Game Go WEE -->
-                    <article class="project-card"
-                             data-project="Skate Game Go WEE"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Skate Game Go WEE</h3>
-                            <p>Fast, playful.</p>
-                        </div>
-                    </article>
-
-                    <!-- Misc -->
-                    <article class="project-card"
-                             data-project="Misc"
-                             data-category="Game Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Misc</h3>
-                            <p>Experiments & jams.</p>
-                        </div>
-                    </article>
-
-                </div>
-            </div>
-
-            <!-- ================= APP DEVELOPMENT ================= -->
-            <div class="project-category" id="cat-app" aria-label="App Development projects">
-                <div class="projects-grid">
-                    <article class="project-card"
-                             data-project="Wireless BLE Controller of Raspberry Pi Pico W"
-                             data-category="App Development">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Wireless BLE Controller of Raspberry Pi Pico W</h3>
-                            <p>BLE-based controller built on Pico W.</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-
-            <!-- ============ HARDWARE AND ROBOTICS ============ -->
-            <div class="project-category" id="cat-hardware" aria-label="Hardware and Robotics projects">
-                <div class="projects-grid">
-
-                    <article class="project-card"
-                             data-project="Escape Room"
-                             data-category="Hardware and Robotics">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Escape Room</h3>
-                            <p>Physical / puzzle.</p>
-                        </div>
-                    </article>
-
-                    <article class="project-card"
-                             data-project="Handheld Gaming Device"
-                             data-category="Hardware and Robotics">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Handheld Gaming Device</h3>
-                            <p>Custom built handheld.</p>
-                        </div>
-                    </article>
-
-                    <article class="project-card"
-                             data-project="Motor Controller PCB"
-                             data-category="Hardware and Robotics">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Motor Controller PCB</h3>
-                            <p>Electronics design.</p>
-                        </div>
-                    </article>
-
-                    <article class="project-card"
-                             data-project="Nerf Dart Turret"
-                             data-category="Hardware and Robotics">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Nerf Dart Turret</h3>
-                            <p>Motorized / control.</p>
-                        </div>
-                    </article>
-
-                    <article class="project-card"
-                             data-project="Omni-Directional Car"
-                             data-category="Hardware and Robotics">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Omni-Directional Car</h3>
-                            <p>Mecanum / omni drive.</p>
-                        </div>
-                    </article>
-
-                    <article class="project-card"
-                             data-project="Robot Controlled in Virtual Reality"
-                             data-category="Hardware and Robotics">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Robot Controlled in Virtual Reality</h3>
-                            <p>XR + robotics.</p>
-                        </div>
-                    </article>
-
-                    <article class="project-card"
-                             data-project="Sun-Catcher"
-                             data-category="Hardware and Robotics">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Sun-Catcher</h3>
-                            <p>Solar tracking.</p>
-                        </div>
-                    </article>
-
-                    <article class="project-card"
-                             data-project="Toaster"
-                             data-category="Hardware and Robotics">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Toaster</h3>
-                            <p>Embedded timer.</p>
-                        </div>
-                    </article>
-
-                </div>
-            </div>
-
-            <!-- ================= LEGO STUDIO ================= -->
-            <div class="project-category" id="cat-lego" aria-label="Lego Studio projects">
-                <div class="projects-grid">
-
-                    <article class="project-card" data-project="Nano Hogwarts Legacy" data-category="Lego Studio">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Nano Hogwarts Legacy</h3>
-                        </div>
-                    </article>
-
-                    <article class="project-card" data-project="Danse-Krabbe" data-category="Lego Studio">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Danse-Krabbe</h3>
-                        </div>
-                    </article>
-
-                    <article class="project-card" data-project="Farvesorteringsmaskine" data-category="Lego Studio">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Farvesorteringsmaskine</h3>
-                        </div>
-                    </article>
-
-                    <article class="project-card" data-project="Farvesorteringsmaskine Avanceret" data-category="Lego Studio">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Farvesorteringsmaskine Avanceret</h3>
-                        </div>
-                    </article>
-
-                    <article class="project-card" data-project="Gaffeltruck" data-category="Lego Studio">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Gaffeltruck</h3>
-                        </div>
-                    </article>
-
-                    <article class="project-card" data-project="Guitar" data-category="Lego Studio">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Guitar</h3>
-                        </div>
-                    </article>
-
-                    <article class="project-card" data-project="Kortdeler" data-category="Lego Studio">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Kortdeler</h3>
-                        </div>
-                    </article>
-
-                    <article class="project-card" data-project="Robot Arm" data-category="Lego Studio">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Robot Arm</h3>
-                        </div>
-                    </article>
-
-                    <article class="project-card" data-project="Robot Arm Stor" data-category="Lego Studio">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Robot Arm Stor</h3>
-                        </div>
-                    </article>
-
-                    <article class="project-card" data-project="Rul-Bot" data-category="Lego Studio">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Rul-Bot</h3>
-                        </div>
-                    </article>
-
-                </div>
-            </div>
-
-            <!-- =============== TEACHING DESIGN =============== -->
-            <div class="project-category" id="cat-teaching" aria-label="Teaching Design projects">
-                <div class="projects-grid">
-                    <article class="project-card"
-                             data-project="ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025"
-                             data-category="Teaching Design">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025</h3>
-                        </div>
-                    </article>
-
-                    <article class="project-card"
-                             data-project="Teknologiskolen Instructor at Camp Autumn 2025"
-                             data-category="Teaching Design">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Teknologiskolen Instructor at Camp Autumn 2025</h3>
-                        </div>
-                    </article>
-
-                    <article class="project-card"
-                             data-project="Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025"
-                             data-category="Teaching Design">
-                        <div class="project-media">
-                            <button class="card-nav left" aria-label="Previous media">&#10094;</button>
-                            <div class="project-media-inner">
-                                <img alt="" class="project-media-img">
-                                <video class="project-media-video" muted playsinline style="display:none;"></video>
-                            </div>
-                            <button class="card-nav right" aria-label="Next media">&#10095;</button>
-                        </div>
-                        <div class="project-card-body">
-                            <h3>Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025</h3>
-                        </div>
-                    </article>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- GALLERY MODAL -->
-    <div class="gallery-modal" id="galleryModal" aria-modal="true" role="dialog" aria-label="Project media viewer">
-        <div class="gallery-dialog">
-            <button class="gallery-close" id="galleryClose" aria-label="Close media viewer">&times;</button>
-            <header class="gallery-header">
-                <h3 class="gallery-title" id="galleryTitle">Project title</h3>
-                <p class="gallery-subtitle" id="gallerySubtitle">Category</p>
-            </header>
-            <div class="gallery-main">
-                <img id="galleryImage" class="gallery-media" alt="" style="display:none;">
-                <video id="galleryVideo" class="gallery-media" controls style="display:none;"></video>
-                <div class="gallery-placeholder" id="galleryPlaceholder">
-                    <p>Media goes here</p>
-                </div>
-                <button class="gallery-nav left" id="galleryPrev" aria-label="Previous media">&#10094;</button>
-                <button class="gallery-nav right" id="galleryNext" aria-label="Next media">&#10095;</button>
-            </div>
-            <footer class="gallery-footer">
-                <div class="gallery-progress" aria-label="Media progress">
-                    <div class="gallery-progress-bar" id="galleryProgressBar"></div>
-                </div>
-                <span id="galleryCounter" class="gallery-counter-text">1 / 1</span>
-            </footer>
-        </div>
-    </div>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <h2>Contact Me</h2>
-        <p>Feel free to reach out for any questions or opportunities.</p>
-
-        <form id="contactForm">
-            <div class="form-row">
-                <div class="form-group">
-                    <input type="text" id="firstName" name="firstName" placeholder="First Name">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="lastName" name="lastName" placeholder="Last Name">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <input type="text" id="organization" name="organization" placeholder="Organization (optional)">
-                </div>
-                <div class="form-group">
-                    <input type="text" id="email" name="email" placeholder="Email" size="30">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <input type="text" id="subject" name="subject" placeholder="Subject">
-            </div>
-
-            <div class="form-group">
-                <textarea id="message" name="message" placeholder="Message (max 250 characters)"></textarea>
-                <div id="charCount">0/250</div>
-            </div>
-
-            <button id="submitButton" type="submit">Submit</button>
-        </form>
-    </section>
-
-    <!-- Popup Modal -->
-    <div id="confirmationOverlay" class="overlay">
-        <div class="popup">
-            <p id="confirmationMessage"></p>
-            <button id="backButton">Close</button>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>My Portfolio 2024 - Christian Rasmussen</p>
-    </footer>
-
-    <!-- bump version when you change JS -->
-    <script src="script.js?v=5"></script>
-</body>
+        <script src="script.js"></script>
+    </body>
 </html>
