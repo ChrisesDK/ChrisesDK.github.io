@@ -401,6 +401,7 @@ body {
     width: 100%;
     height: 100%;
     display: flex;
+    z-index: 1;
 }
 
 .project-media-img {
@@ -423,6 +424,7 @@ body {
     place-items: center;
     cursor: pointer;
     font-size: 1rem;
+    z-index: 2; 
 }
 
 .card-nav.left {
