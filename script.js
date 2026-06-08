@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // =========================================================
-    // 2. NEW HAMBURGER MENU
+    // 2. HAMBURGER MENU
     // =========================================================
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -107,35 +107,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
         hamburger.addEventListener('click', function (event) {
             event.stopPropagation();
-            const isOpen = hamburger.classList.contains('is-open');
-            if (isOpen) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
+            hamburger.classList.contains('is-open') ? closeMenu() : openMenu();
         });
 
-        // close when clicking outside
         document.addEventListener('click', function (event) {
-            const clickInsideBtn = hamburger.contains(event.target);
-            const clickInsideMenu = mobileMenu.contains(event.target);
-            if (!clickInsideBtn && !clickInsideMenu) {
+            if (!hamburger.contains(event.target) && !mobileMenu.contains(event.target)) {
                 closeMenu();
             }
         });
 
-        // close on ESC
         document.addEventListener('keydown', function (event) {
-            if (event.key === 'Escape') {
-                closeMenu();
-            }
+            if (event.key === 'Escape') closeMenu();
         });
 
-        // close when clicking a link
         mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function () {
-                closeMenu();
-            });
+            link.addEventListener('click', closeMenu);
         });
     }
 
@@ -153,12 +139,21 @@ document.addEventListener('DOMContentLoaded', function () {
             "Game Developer",
             "Game Designer",
             "Interaction Designer",
-            "App Developer",
-            "Mixed Reality Developer",
-            "STEM Educator",
+            "Unity Developer",
+            "Mobile App Developer",
+            "Frontend Developer",
+            "React Developer",
+            "IoT Developer",
+            "Virtual Reality Developer",
+            "Augmented Reality Developer",
+            "Technology Educator",
             "Robotics Instructor",
+            "Technical Instructor",
+            "Workshop Facilitator",
             "Project Coordinator",
         ];
+
+        
 
         let titleIndex = 0;
 
@@ -167,9 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 currentAngle -= 90;
                 cube.style.transform = `rotateX(${currentAngle}deg)`;
 
-                if (currentAngle <= -360) {
-                    isSnapping = true;
-                }
+                if (currentAngle <= -360) isSnapping = true;
 
                 const faceToUpdate = Math.abs((currentAngle / 90) - 1) % 4;
                 titleIndex = (titleIndex + 1) % titles.length;
@@ -213,14 +206,37 @@ document.addEventListener('DOMContentLoaded', function () {
             projectCategories.forEach(cat => {
                 cat.classList.toggle('active', cat.id === targetId);
             });
+
+            // Cards in a freshly-shown tab have no layout box until now,
+            // so kick off loading for whatever is in view.
+            requestAnimationFrame(loadVisibleCards);
         });
     });
 
     // =========================================================
-    // 5. MEDIA GALLERY + CARDS
+    // 5. SCROLL REVEAL
+    // =========================================================
+    const revealEls = document.querySelectorAll('.reveal');
+    if (revealEls.length && 'IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '0px 0px -10% 0px' });
+        revealEls.forEach(el => revealObserver.observe(el));
+    } else {
+        revealEls.forEach(el => el.classList.add('is-visible'));
+    }
+
+    // =========================================================
+    // 6. MEDIA: cards (lazy thumbnails) + gallery modal
     // =========================================================
     let mediaData = {};
-    const perCardIndex = new Map();
+    const perCardIndex = new Map();      // card -> current media index
+    const cardMediaMap = new Map();      // card -> media list
     let gallerySourceCard = null;
 
     const galleryModal = document.getElementById('galleryModal');
@@ -237,51 +253,96 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let currentGalleryMedia = [];
     let currentGalleryIndex = 0;
+    let galleryLoadToken = 0; // guards async full-res swaps against fast nav
 
     function isVideoSrc(src) {
         return src && /\.(mp4|webm|ogg)$/i.test(src);
     }
 
-    function showMediaOnCard(card, src) {
-        const imgEl = card.querySelector('.project-media-img');
-        const vidEl = card.querySelector('.project-media-video');
-        const video = isVideoSrc(src);
+    // Maps a full-res media path to its generated thumbnail.
+    // Mirrors generateThumbnails.js. Returns null for videos (no thumb).
+    function thumbFor(src) {
+        if (!src || isVideoSrc(src)) return null;
+        if (!src.startsWith('Assets/Media/')) return null;
+        return src
+            .replace(/^Assets\/Media\//, 'Assets/Thumbs/')
+            .replace(/\.[^.]+$/, '.webp');
+    }
 
-        if (video) {
-            if (imgEl) imgEl.style.display = 'none';
-            if (vidEl) {
-                vidEl.style.display = 'block';
-                if (vidEl.src !== src) vidEl.src = src;
-                try { vidEl.load(); } catch (e) {}
-            }
-        } else {
-            if (imgEl) {
-                imgEl.style.display = 'block';
-                imgEl.src = src;
-            }
-            if (vidEl) {
-                vidEl.pause();
-                vidEl.style.display = 'none';
-                vidEl.removeAttribute('src');
-            }
+    // --- card display ---------------------------------------------------
+    function showMediaOnCard(card, src) {
+        const media = card.querySelector('.project-media');
+        const imgEl = card.querySelector('.project-media-img');
+        const poster = card.querySelector('.project-media-poster');
+
+        if (isVideoSrc(src)) {
+            // Cards never download video; show a styled play poster instead.
+            if (imgEl) { imgEl.classList.remove('is-loaded'); imgEl.removeAttribute('src'); }
+            if (poster) poster.classList.add('show');
+            if (media) media.classList.add('is-ready');
+            return;
         }
+
+        if (poster) poster.classList.remove('show');
+        if (!imgEl) return;
+
+        const thumb = thumbFor(src) || src;
+        imgEl.classList.remove('is-loaded');
+        imgEl.onload = () => {
+            imgEl.classList.add('is-loaded');
+            if (media) media.classList.add('is-ready');
+        };
+        imgEl.onerror = () => {
+            // fall back to the full-res original if a thumb is missing
+            if (imgEl.src.indexOf('Assets/Thumbs/') !== -1) imgEl.src = src;
+        };
+        imgEl.src = thumb;
     }
 
     function updateCardArrows(card, currentIndex, mediaLength) {
         const btnPrev = card.querySelector('.card-nav.left');
         const btnNext = card.querySelector('.card-nav.right');
-        if (!btnPrev || !btnNext) return;
-
-        btnPrev.classList.toggle('is-disabled', currentIndex <= 0);
-        btnNext.classList.toggle('is-disabled', currentIndex >= mediaLength - 1);
+        if (btnPrev) btnPrev.classList.toggle('is-disabled', currentIndex <= 0);
+        if (btnNext) btnNext.classList.toggle('is-disabled', currentIndex >= mediaLength - 1);
     }
 
+    // Load a card's current thumbnail once (idempotent).
+    function loadCard(card) {
+        if (card.dataset.loaded === '1') return;
+        card.dataset.loaded = '1';
+        const mediaList = cardMediaMap.get(card) || ['Assets/no-media.png'];
+        const idx = perCardIndex.get(card) || 0;
+        showMediaOnCard(card, mediaList[idx]);
+    }
+
+    function loadVisibleCards() {
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        document.querySelectorAll('.project-category.active .project-card').forEach(card => {
+            const r = card.getBoundingClientRect();
+            if (r.bottom > -200 && r.top < vh + 200) loadCard(card);
+        });
+    }
+
+    // Lazy-load card thumbs as they approach the viewport.
+    const cardObserver = ('IntersectionObserver' in window)
+        ? new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    loadCard(entry.target);
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '300px 0px' })
+        : null;
+
+    // --- gallery arrows -------------------------------------------------
     function updateGalleryArrows() {
         if (!galleryPrev || !galleryNext) return;
         galleryPrev.classList.toggle('is-disabled', currentGalleryIndex <= 0);
         galleryNext.classList.toggle('is-disabled', currentGalleryIndex >= currentGalleryMedia.length - 1);
     }
 
+    // --- load data + init ----------------------------------------------
     fetch('mediaData.json')
         .then(res => {
             if (!res.ok) throw new Error('mediaData.json not found. HTTP ' + res.status);
@@ -292,7 +353,7 @@ document.addEventListener('DOMContentLoaded', function () {
             initializeProjectCards();
         })
         .catch(err => {
-            console.error('❌ Could not load mediaData.json:', err);
+            console.error('Could not load mediaData.json:', err);
             mediaData = {};
             initializeProjectCards();
         });
@@ -306,17 +367,27 @@ document.addEventListener('DOMContentLoaded', function () {
             const mediaList = (mediaData[categoryName]?.[projectName]) || ['Assets/no-media.png'];
 
             perCardIndex.set(card, 0);
-            showMediaOnCard(card, mediaList[0]);
+            cardMediaMap.set(card, mediaList);
             updateCardArrows(card, 0, mediaList.length);
+
+            // inject the video play poster element
+            const inner = card.querySelector('.project-media-inner');
+            if (inner && !inner.querySelector('.project-media-poster')) {
+                const poster = document.createElement('div');
+                poster.className = 'project-media-poster';
+                poster.innerHTML = '<span class="poster-ring"></span>';
+                inner.appendChild(poster);
+            }
 
             const btnPrev = card.querySelector('.card-nav.left');
             const btnNext = card.querySelector('.card-nav.right');
 
             if (btnPrev) {
                 btnPrev.addEventListener('click', (e) => {
-                    e.stopPropagation();
+                    e.stopPropagation();                 // always swallow the click so the card doesn't open
                     let idx = perCardIndex.get(card) || 0;
-                    if (idx > 0) idx -= 1;
+                    if (idx <= 0) return;                // at the first item: blocked, but no-op
+                    idx -= 1;
                     perCardIndex.set(card, idx);
                     showMediaOnCard(card, mediaList[idx]);
                     updateCardArrows(card, idx, mediaList.length);
@@ -325,9 +396,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (btnNext) {
                 btnNext.addEventListener('click', (e) => {
-                    e.stopPropagation();
+                    e.stopPropagation();                 // always swallow the click so the card doesn't open
                     let idx = perCardIndex.get(card) || 0;
-                    if (idx < mediaList.length - 1) idx += 1;
+                    if (idx >= mediaList.length - 1) return; // at the last item: blocked, but no-op
+                    idx += 1;
                     perCardIndex.set(card, idx);
                     showMediaOnCard(card, mediaList[idx]);
                     updateCardArrows(card, idx, mediaList.length);
@@ -339,9 +411,61 @@ document.addEventListener('DOMContentLoaded', function () {
                 gallerySourceCard = card;
                 openGallery(projectName, categoryName, mediaList, startIndex);
             });
+
+            if (cardObserver) cardObserver.observe(card);
         });
+
+        // First-paint: load whatever is already visible right away.
+        loadVisibleCards();
+
+        // Then progressively warm the rest of the thumbnails round-robin
+        // (every project's 2nd image, then 3rd, ...) so card/modal nav is instant.
+        schedulePreload(cards);
     }
 
+    // =========================================================
+    // 7. ROUND-ROBIN THUMBNAIL PRELOAD
+    //    Warms thumbnails column-by-column across all projects so the
+    //    user has the shortest possible wait whichever group they open.
+    // =========================================================
+    function schedulePreload(cards) {
+        const lists = [];
+        cards.forEach(card => {
+            const list = cardMediaMap.get(card);
+            if (list && list.length) lists.push(list);
+        });
+        if (!lists.length) return;
+
+        const maxLen = lists.reduce((m, l) => Math.max(m, l.length), 0);
+        const queue = [];
+        // column 0 first (the visible cover), then 1, 2, ... across every group
+        for (let col = 0; col < maxLen; col++) {
+            for (const list of lists) {
+                if (col < list.length) {
+                    const t = thumbFor(list[col]);
+                    if (t) queue.push(t);
+                }
+            }
+        }
+
+        const idle = window.requestIdleCallback || function (cb) { return setTimeout(() => cb({ timeRemaining: () => 8 }), 200); };
+        let qi = 0;
+
+        function pump(deadline) {
+            while (qi < queue.length && (deadline.timeRemaining ? deadline.timeRemaining() > 4 : true)) {
+                const img = new Image();
+                img.decoding = 'async';
+                img.src = queue[qi++];
+                if (!deadline.timeRemaining) break; // setTimeout fallback: one per tick
+            }
+            if (qi < queue.length) idle(pump);
+        }
+        idle(pump);
+    }
+
+    // =========================================================
+    // 8. GALLERY MODAL
+    // =========================================================
     function openGallery(projectName, categoryName, mediaList, startIndex = 0) {
         currentGalleryMedia = mediaList;
         currentGalleryIndex = Math.min(Math.max(startIndex, 0), mediaList.length - 1);
@@ -358,119 +482,131 @@ document.addEventListener('DOMContentLoaded', function () {
     function closeGallery() {
         galleryModal.classList.remove('open');
         document.body.classList.remove('noscroll');
-        if (galleryVideo) galleryVideo.pause(); // ✅ pause on close
+        if (galleryVideo) {
+            galleryVideo.pause();
+            galleryVideo.removeAttribute('src');
+            galleryVideo.load();
+        }
         gallerySourceCard = null;
     }
 
-    // =========================================================
-    // ✨ MODIFIED: Autoplay video in modal, pause old one
-    // =========================================================
     function showGalleryMedia(index) {
         const src = currentGalleryMedia[index];
-        const video = isVideoSrc(src);
+        const token = ++galleryLoadToken;
 
-        // Always stop any currently playing video first
         if (galleryVideo) galleryVideo.pause();
 
-        if (video) {
+        if (isVideoSrc(src)) {
+            if (galleryImage) { galleryImage.style.display = 'none'; galleryImage.classList.remove('is-loading'); }
+            if (galleryPlaceholder) galleryPlaceholder.style.display = 'none';
             if (galleryVideo) {
                 galleryVideo.style.display = 'block';
-
-                if (galleryVideo.src !== src) {
-                    galleryVideo.src = src;
-                }
-
-                // allow autoplay (muted & inline)
+                if (galleryVideo.src !== src) galleryVideo.src = src;
                 galleryVideo.muted = true;
                 galleryVideo.playsInline = true;
-
-                // attempt to autoplay
-                const playPromise = galleryVideo.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(err => console.log("Autoplay blocked:", err));
-                }
+                const p = galleryVideo.play();
+                if (p !== undefined) p.catch(() => {});
             }
-
-            if (galleryImage) galleryImage.style.display = 'none';
-            if (galleryPlaceholder) galleryPlaceholder.style.display = 'none';
         } else if (src) {
+            if (galleryVideo) { galleryVideo.pause(); galleryVideo.style.display = 'none'; }
+            if (galleryPlaceholder) galleryPlaceholder.style.display = 'none';
             if (galleryImage) {
                 galleryImage.style.display = 'block';
-                galleryImage.src = src;
+                // Blur-up: show the tiny thumb instantly (already cached),
+                // then swap to full-res once it has decoded.
+                const thumb = thumbFor(src);
+                galleryImage.classList.add('is-loading');
+                galleryImage.src = thumb || src;
+
+                const full = new Image();
+                full.onload = () => {
+                    if (token !== galleryLoadToken) return; // user moved on
+                    galleryImage.src = src;
+                    galleryImage.classList.remove('is-loading');
+                };
+                full.onerror = () => {
+                    if (token !== galleryLoadToken) return;
+                    galleryImage.classList.remove('is-loading');
+                };
+                full.src = src;
             }
-            if (galleryVideo) {
-                galleryVideo.pause();
-                galleryVideo.style.display = 'none';
-            }
-            if (galleryPlaceholder) galleryPlaceholder.style.display = 'none';
         } else {
             if (galleryImage) galleryImage.style.display = 'none';
-            if (galleryVideo) {
-                galleryVideo.pause();
-                galleryVideo.style.display = 'none';
-            }
+            if (galleryVideo) { galleryVideo.pause(); galleryVideo.style.display = 'none'; }
             if (galleryPlaceholder) galleryPlaceholder.style.display = 'flex';
         }
 
         const total = currentGalleryMedia.length;
-        const current = index + 1;
-        galleryCounter.textContent = `${current} / ${total}`;
-        galleryProgressBar.style.width = (current / total) * 100 + '%';
+        galleryCounter.textContent = `${index + 1} / ${total}`;
+        galleryProgressBar.style.width = ((index + 1) / total) * 100 + '%';
 
         if (gallerySourceCard) {
             perCardIndex.set(gallerySourceCard, index);
+            gallerySourceCard.dataset.loaded = '1';
             showMediaOnCard(gallerySourceCard, src);
             updateCardArrows(gallerySourceCard, index, total);
         }
 
         updateGalleryArrows();
+        prefetchNeighbours(index);
     }
 
-    // =========================================================
-    // MODAL NAVIGATION
-    // =========================================================
-    if (galleryPrev) {
-        galleryPrev.addEventListener('click', () => {
-            if (currentGalleryIndex > 0) {
-                currentGalleryIndex -= 1;
-                showGalleryMedia(currentGalleryIndex);
+    // Warm the full-res images on either side so Prev/Next feel instant.
+    function prefetchNeighbours(index) {
+        [index - 1, index + 1].forEach(i => {
+            const s = currentGalleryMedia[i];
+            if (s && !isVideoSrc(s)) {
+                const img = new Image();
+                img.decoding = 'async';
+                img.src = s;
             }
         });
     }
 
-    if (galleryNext) {
-        galleryNext.addEventListener('click', () => {
-            if (currentGalleryIndex < currentGalleryMedia.length - 1) {
-                currentGalleryIndex += 1;
-                showGalleryMedia(currentGalleryIndex);
-            }
-        });
+    function galleryGo(delta) {
+        const next = currentGalleryIndex + delta;
+        if (next < 0 || next >= currentGalleryMedia.length) return;
+        currentGalleryIndex = next;
+        showGalleryMedia(currentGalleryIndex);
     }
 
-    if (galleryClose) {
-        galleryClose.addEventListener('click', closeGallery);
-    }
+    if (galleryPrev) galleryPrev.addEventListener('click', () => galleryGo(-1));
+    if (galleryNext) galleryNext.addEventListener('click', () => galleryGo(1));
+    if (galleryClose) galleryClose.addEventListener('click', closeGallery);
 
     if (galleryModal) {
         galleryModal.addEventListener('click', (e) => {
-            if (e.target === galleryModal) {
-                closeGallery();
-            }
+            if (e.target === galleryModal) closeGallery();
         });
     }
 
     document.addEventListener('keydown', (e) => {
-        const isOpen = galleryModal.classList.contains('open');
-        if (!isOpen) return;
-
-        if (e.key === 'Escape') {
-            closeGallery();
-        } else if (e.key === 'ArrowLeft' && currentGalleryIndex > 0) {
-            currentGalleryIndex -= 1;
-            showGalleryMedia(currentGalleryIndex);
-        } else if (e.key === 'ArrowRight' && currentGalleryIndex < currentGalleryMedia.length - 1) {
-            currentGalleryIndex += 1;
-            showGalleryMedia(currentGalleryIndex);
-        }
+        if (!galleryModal.classList.contains('open')) return;
+        if (e.key === 'Escape') closeGallery();
+        else if (e.key === 'ArrowLeft') galleryGo(-1);
+        else if (e.key === 'ArrowRight') galleryGo(1);
     });
+
+    // Swipe navigation on touch devices
+    let touchX = null;
+    if (galleryModal) {
+        galleryModal.addEventListener('touchstart', (e) => {
+            touchX = e.changedTouches[0].clientX;
+        }, { passive: true });
+        galleryModal.addEventListener('touchend', (e) => {
+            if (touchX === null) return;
+            const dx = e.changedTouches[0].clientX - touchX;
+            if (Math.abs(dx) > 50) galleryGo(dx < 0 ? 1 : -1);
+            touchX = null;
+        }, { passive: true });
+    }
+
+    // Keep visible cards loading as the user scrolls (covers tab switches too).
+    window.addEventListener('scroll', () => {
+        if (window.__cardScrollRaf) return;
+        window.__cardScrollRaf = requestAnimationFrame(() => {
+            window.__cardScrollRaf = null;
+            loadVisibleCards();
+        });
+    }, { passive: true });
 });

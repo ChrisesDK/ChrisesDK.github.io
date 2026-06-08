@@ -1,8 +1,18 @@
 open terminal in root folder
-run this command:
-node generateMediaJSON.js
 
-Push to Github
+1) Rebuild the media list (after adding/removing files in Assets/Media):
+   node generateMediaJSON.js
+
+2) Rebuild the card thumbnails (fast WebP versions shown on the project cards):
+   node generateThumbnails.js
+   - Only new/changed images are processed, so re-running is cheap.
+   - Output goes to Assets/Thumbs (commit this folder too).
+   - Needs "sharp": run "npm install" once if node_modules is missing.
+
+Note: videos (.mp4) get no thumbnail - cards show a play-button poster and the
+full video only loads inside the viewer modal.
+
+Push to Github (include Assets/Thumbs)
 Delete cached browser data
 
 Maybe switch js version? in html to force update

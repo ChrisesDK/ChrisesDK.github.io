@@ -1,21 +1,52 @@
 {
   "App Development": {
+    "Hearing Aid Simulator": [
+      "Assets/Media/App Development/Hearing Aid Simulator/1.png",
+      "Assets/Media/App Development/Hearing Aid Simulator/2.png",
+      "Assets/Media/App Development/Hearing Aid Simulator/3.png",
+      "Assets/Media/App Development/Hearing Aid Simulator/4.png",
+      "Assets/Media/App Development/Hearing Aid Simulator/5.png",
+      "Assets/Media/App Development/Hearing Aid Simulator/6.png",
+      "Assets/Media/App Development/Hearing Aid Simulator/7.png",
+      "Assets/Media/App Development/Hearing Aid Simulator/8.png",
+      "Assets/Media/App Development/Hearing Aid Simulator/9.png"
+    ],
     "Wireless BLE Controller of Raspberry Pi Pico W": [
-      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/1.jpg",
-      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/2.jpg",
-      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/3.jpg",
-      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/4.jpg",
-      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/5.jpg",
+      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/1.png",
+      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/2.png",
+      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/3.png",
+      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/4.png",
+      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/5.png",
       "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/6.mp4",
       "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/7.mp4",
-      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/8.mp4",
-      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/9.mp4",
-      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/10.png",
-      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/11.png",
-      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/12.png"
+      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/8.jpg",
+      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/9.jpg",
+      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/10.jpg",
+      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/11.jpg",
+      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/12.jpg",
+      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/13.mp4",
+      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/14.mp4"
     ]
   },
   "Game Development": {
+    "AR Path Finding": [
+      "Assets/Media/Game Development/AR Path Finding/1.png",
+      "Assets/Media/Game Development/AR Path Finding/2.png",
+      "Assets/Media/Game Development/AR Path Finding/3.png",
+      "Assets/Media/Game Development/AR Path Finding/4.png",
+      "Assets/Media/Game Development/AR Path Finding/5.png",
+      "Assets/Media/Game Development/AR Path Finding/6.mp4"
+    ],
+    "AR Robot Pre-Deployment Validator": [
+      "Assets/Media/Game Development/AR Robot Pre-Deployment Validator/1.png",
+      "Assets/Media/Game Development/AR Robot Pre-Deployment Validator/2.png",
+      "Assets/Media/Game Development/AR Robot Pre-Deployment Validator/3.png",
+      "Assets/Media/Game Development/AR Robot Pre-Deployment Validator/4.png",
+      "Assets/Media/Game Development/AR Robot Pre-Deployment Validator/5.png",
+      "Assets/Media/Game Development/AR Robot Pre-Deployment Validator/6.png",
+      "Assets/Media/Game Development/AR Robot Pre-Deployment Validator/7.png",
+      "Assets/Media/Game Development/AR Robot Pre-Deployment Validator/8.mp4"
+    ],
     "Bachelor Project": [
       "Assets/Media/Game Development/Bachelor Project/1.png",
       "Assets/Media/Game Development/Bachelor Project/2.png",
