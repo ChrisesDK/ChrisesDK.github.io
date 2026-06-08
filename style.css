@@ -1299,7 +1299,7 @@ footer {
     .about-grid { grid-template-columns: 1fr; gap: 1.6rem; }
 
     /* slightly smaller "and I am a" + rotating titles on phones */
-    .rotating-title-wrapper { font-size: 1.1rem; }
+    .rotating-title-wrapper { font-size: .95rem; }
     .scene { width: 230px; }
     .cube-face { font-size: .9rem; }
 
