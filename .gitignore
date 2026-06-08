@@ -1,2 +1,7 @@
 node_modules/
 package-lock.json
+
+# Pre-compression video backups kept locally (originals; not for the repo)
+*.orig.mp4
+# Throwaway encode log
+optimize-log.txt

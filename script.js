@@ -240,6 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let gallerySourceCard = null;
 
     const galleryModal = document.getElementById('galleryModal');
+    const galleryStage = document.getElementById('galleryStage');
     const galleryClose = document.getElementById('galleryClose');
     const galleryTitle = document.getElementById('galleryTitle');
     const gallerySubtitle = document.getElementById('gallerySubtitle');
@@ -250,6 +251,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const galleryProgressBar = document.getElementById('galleryProgressBar');
     const galleryPrev = document.getElementById('galleryPrev');
     const galleryNext = document.getElementById('galleryNext');
+    const galleryVideoControls = document.getElementById('galleryVideoControls');
+    const gvcPlay = document.getElementById('gvcPlay');
+    const gvcSeek = document.getElementById('gvcSeek');
+    const gvcCurrent = document.getElementById('gvcCurrent');
+    const gvcDuration = document.getElementById('gvcDuration');
+    const gvcMute = document.getElementById('gvcMute');
+    const gvcSpeed = document.getElementById('gvcSpeed');
+    const gvcSpeedMenu = document.getElementById('gvcSpeedMenu');
 
     let currentGalleryMedia = [];
     let currentGalleryIndex = 0;
@@ -269,6 +278,17 @@ document.addEventListener('DOMContentLoaded', function () {
             .replace(/\.[^.]+$/, '.webp');
     }
 
+    // Maps a video path to its generated poster-frame thumbnail (a .webp under
+    // Assets/Thumbs, same as images). Produced by generateVideoPosters.js.
+    // If the poster doesn't exist yet the card just falls back to the play scrim.
+    function videoThumbFor(src) {
+        if (!src || !isVideoSrc(src)) return null;
+        if (!src.startsWith('Assets/Media/')) return null;
+        return src
+            .replace(/^Assets\/Media\//, 'Assets/Thumbs/')
+            .replace(/\.[^.]+$/, '.webp');
+    }
+
     // --- card display ---------------------------------------------------
     function showMediaOnCard(card, src) {
         const media = card.querySelector('.project-media');
@@ -276,10 +296,22 @@ document.addEventListener('DOMContentLoaded', function () {
         const poster = card.querySelector('.project-media-poster');
 
         if (isVideoSrc(src)) {
-            // Cards never download video; show a styled play poster instead.
-            if (imgEl) { imgEl.classList.remove('is-loaded'); imgEl.removeAttribute('src'); }
+            // Cards never download the video itself; show a play scrim, and a
+            // lightweight poster-frame thumbnail behind it when one exists.
             if (poster) poster.classList.add('show');
             if (media) media.classList.add('is-ready');
+            if (imgEl) {
+                const vthumb = videoThumbFor(src);
+                if (vthumb) {
+                    imgEl.classList.remove('is-loaded');
+                    imgEl.onload = () => imgEl.classList.add('is-loaded');
+                    imgEl.onerror = () => { imgEl.classList.remove('is-loaded'); imgEl.removeAttribute('src'); };
+                    imgEl.src = vthumb;
+                } else {
+                    imgEl.classList.remove('is-loaded');
+                    imgEl.removeAttribute('src');
+                }
+            }
             return;
         }
 
@@ -487,6 +519,10 @@ document.addEventListener('DOMContentLoaded', function () {
             galleryVideo.removeAttribute('src');
             galleryVideo.load();
         }
+        if (gvcSpeedMenu) {
+            gvcSpeedMenu.classList.remove('open');
+            if (gvcSpeed) gvcSpeed.setAttribute('aria-expanded', 'false');
+        }
         gallerySourceCard = null;
     }
 
@@ -495,6 +531,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const token = ++galleryLoadToken;
 
         if (galleryVideo) galleryVideo.pause();
+
+        if (galleryStage) galleryStage.classList.toggle('is-video', isVideoSrc(src));
 
         if (isVideoSrc(src)) {
             if (galleryImage) { galleryImage.style.display = 'none'; galleryImage.classList.remove('is-loading'); }
@@ -574,6 +612,119 @@ document.addEventListener('DOMContentLoaded', function () {
     if (galleryNext) galleryNext.addEventListener('click', () => galleryGo(1));
     if (galleryClose) galleryClose.addEventListener('click', closeGallery);
 
+    // --- custom video controls -----------------------------------------
+    const PLAY_ICON = '▶';   // ▶
+    const PAUSE_ICON = '⏸';  // ⏸
+    const VOL_ON = '🔊';  // 🔊
+    const VOL_OFF = '🔇'; // 🔇
+
+    function fmtTime(s) {
+        if (!isFinite(s) || s < 0) s = 0;
+        const m = Math.floor(s / 60);
+        const sec = Math.floor(s % 60);
+        return m + ':' + String(sec).padStart(2, '0');
+    }
+
+    function togglePlay() {
+        if (galleryVideo.paused) { const p = galleryVideo.play(); if (p) p.catch(() => {}); }
+        else galleryVideo.pause();
+    }
+
+    let galleryRate = 1;   // remembered across videos
+
+    function updateSeekFill() {
+        if (!gvcSeek) return;
+        const pct = (parseFloat(gvcSeek.value) / 1000) * 100;
+        gvcSeek.style.setProperty('--seek', pct + '%');
+    }
+
+    if (galleryVideo) {
+        let gvcSeeking = false;
+
+        const syncPlayIcon = () => { if (gvcPlay) gvcPlay.textContent = galleryVideo.paused ? PLAY_ICON : PAUSE_ICON; };
+        const syncMuteIcon = () => {
+            if (!gvcMute) return;
+            gvcMute.textContent = galleryVideo.muted ? VOL_OFF : VOL_ON;
+            gvcMute.setAttribute('aria-label', galleryVideo.muted ? 'Unmute' : 'Mute');
+        };
+
+        galleryVideo.addEventListener('play', syncPlayIcon);
+        galleryVideo.addEventListener('pause', syncPlayIcon);
+        galleryVideo.addEventListener('volumechange', syncMuteIcon);
+
+        galleryVideo.addEventListener('loadedmetadata', () => {
+            if (gvcDuration) gvcDuration.textContent = fmtTime(galleryVideo.duration);
+            if (gvcSeek) gvcSeek.value = '0';
+            if (gvcCurrent) gvcCurrent.textContent = '0:00';
+            galleryVideo.playbackRate = galleryRate;   // keep chosen speed
+            updateSeekFill();
+            syncMuteIcon();
+            syncPlayIcon();
+        });
+
+        galleryVideo.addEventListener('timeupdate', () => {
+            if (gvcSeeking) return;
+            const d = galleryVideo.duration;
+            if (gvcSeek && isFinite(d) && d > 0) gvcSeek.value = String((galleryVideo.currentTime / d) * 1000);
+            if (gvcCurrent) gvcCurrent.textContent = fmtTime(galleryVideo.currentTime);
+            updateSeekFill();
+        });
+
+        if (gvcPlay) gvcPlay.addEventListener('click', (e) => { e.stopPropagation(); togglePlay(); });
+        if (gvcMute) gvcMute.addEventListener('click', (e) => { e.stopPropagation(); galleryVideo.muted = !galleryVideo.muted; });
+
+        if (gvcSeek) {
+            // Scrub live: seek as the knob moves so the video follows and the
+            // filled track tracks the knob (no jumping back).
+            gvcSeek.addEventListener('input', () => {
+                gvcSeeking = true;
+                const d = galleryVideo.duration;
+                if (isFinite(d) && d > 0) {
+                    const t = (parseFloat(gvcSeek.value) / 1000) * d;
+                    galleryVideo.currentTime = t;
+                    if (gvcCurrent) gvcCurrent.textContent = fmtTime(t);
+                }
+                updateSeekFill();
+            });
+            gvcSeek.addEventListener('change', () => { gvcSeeking = false; });
+        }
+
+        // Click the video itself to toggle play/pause.
+        galleryVideo.addEventListener('click', togglePlay);
+
+        // --- playback speed menu ---
+        if (gvcSpeed && gvcSpeedMenu) {
+            const speedItems = gvcSpeedMenu.querySelectorAll('button[data-rate]');
+
+            const closeSpeedMenu = () => {
+                gvcSpeedMenu.classList.remove('open');
+                gvcSpeed.setAttribute('aria-expanded', 'false');
+            };
+
+            gvcSpeed.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const open = gvcSpeedMenu.classList.toggle('open');
+                gvcSpeed.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+
+            speedItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    galleryRate = parseFloat(item.dataset.rate);
+                    galleryVideo.playbackRate = galleryRate;
+                    gvcSpeed.innerHTML = item.innerHTML;          // e.g. "1.5×"
+                    speedItems.forEach(b => b.setAttribute('aria-checked', b === item ? 'true' : 'false'));
+                    closeSpeedMenu();
+                });
+            });
+
+            // close when clicking elsewhere
+            document.addEventListener('click', (e) => {
+                if (!gvcSpeedMenu.contains(e.target) && e.target !== gvcSpeed) closeSpeedMenu();
+            });
+        }
+    }
+
     if (galleryModal) {
         galleryModal.addEventListener('click', (e) => {
             if (e.target === galleryModal) closeGallery();
@@ -582,8 +733,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener('keydown', (e) => {
         if (!galleryModal.classList.contains('open')) return;
-        if (e.key === 'Escape') closeGallery();
-        else if (e.key === 'ArrowLeft') galleryGo(-1);
+        if (e.key === 'Escape') { closeGallery(); return; }
+        // let arrow keys drive the focused seek slider instead of navigating
+        if (e.target === gvcSeek) return;
+        if (e.key === 'ArrowLeft') galleryGo(-1);
         else if (e.key === 'ArrowRight') galleryGo(1);
     });
 
@@ -591,6 +744,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let touchX = null;
     if (galleryModal) {
         galleryModal.addEventListener('touchstart', (e) => {
+            // ignore swipes that start on the video controls (e.g. dragging the scrubber)
+            if (galleryVideoControls && galleryVideoControls.contains(e.target)) { touchX = null; return; }
             touchX = e.changedTouches[0].clientX;
         }, { passive: true });
         galleryModal.addEventListener('touchend', (e) => {

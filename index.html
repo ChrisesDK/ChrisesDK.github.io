@@ -881,9 +881,29 @@
             <!-- The stage shrink-wraps the media; all chrome floats over it -->
             <div class="gallery-stage" id="galleryStage">
                 <img id="galleryImage" class="gallery-media" alt="" style="display:none;">
-                <video id="galleryVideo" class="gallery-media" controls playsinline style="display:none;"></video>
+                <video id="galleryVideo" class="gallery-media" playsinline style="display:none;"></video>
                 <div class="gallery-placeholder" id="galleryPlaceholder">
                     <p>Media goes here</p>
+                </div>
+
+                <!-- Custom video controls: float elevated into the video frame,
+                     above the (identical-to-images) content progress bar. -->
+                <div class="gallery-video-controls" id="galleryVideoControls">
+                    <button class="gvc-btn gvc-play" id="gvcPlay" type="button" aria-label="Play">&#9654;</button>
+                    <span class="gvc-time" id="gvcCurrent">0:00</span>
+                    <input class="gvc-seek" id="gvcSeek" type="range" min="0" max="1000" step="1" value="0" aria-label="Seek video">
+                    <span class="gvc-time" id="gvcDuration">0:00</span>
+                    <div class="gvc-speed">
+                        <button class="gvc-btn gvc-speed-btn" id="gvcSpeed" type="button" aria-label="Playback speed" aria-haspopup="true" aria-expanded="false">1&times;</button>
+                        <div class="gvc-speed-menu" id="gvcSpeedMenu" role="menu" aria-label="Playback speed">
+                            <button type="button" role="menuitemradio" data-rate="0.5">0.5&times;</button>
+                            <button type="button" role="menuitemradio" data-rate="1" aria-checked="true">1&times;</button>
+                            <button type="button" role="menuitemradio" data-rate="1.5">1.5&times;</button>
+                            <button type="button" role="menuitemradio" data-rate="2">2&times;</button>
+                            <button type="button" role="menuitemradio" data-rate="4">4&times;</button>
+                        </div>
+                    </div>
+                    <button class="gvc-btn gvc-mute" id="gvcMute" type="button" aria-label="Unmute">&#128263;</button>
                 </div>
 
                 <div class="gallery-caption">
