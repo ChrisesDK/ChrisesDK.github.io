@@ -1298,8 +1298,10 @@ footer {
 
     .about-grid { grid-template-columns: 1fr; gap: 1.6rem; }
 
+    /* slightly smaller "and I am a" + rotating titles on phones */
+    .rotating-title-wrapper { font-size: 1.1rem; }
     .scene { width: 230px; }
-    .cube-face { font-size: 1rem; }
+    .cube-face { font-size: .9rem; }
 
     .gallery-stage { width: 96vw; height: 86vh; }
     .gallery-nav { width: 40px; height: 40px; }
@@ -1320,4 +1322,10 @@ footer {
     /* tighter pills so the wrapped category rows stay compact on phones */
     .project-tabs { gap: .45rem; }
     .project-tab { padding: .45rem .9rem; font-size: .85rem; }
+
+    /* Phone video controls: the seek bar gets its own full-width row so it's
+       long and easy to scrub; the buttons/time sit on a second row below. */
+    .gallery-video-controls { flex-wrap: wrap; gap: .35rem .6rem; }
+    .gallery-video-controls .gvc-seek { order: -1; flex-basis: 100%; }
+    .gallery-video-controls #gvcDuration { margin-left: auto; }
 }
