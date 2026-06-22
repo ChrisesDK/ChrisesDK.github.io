@@ -1,29 +1,29 @@
 /* =========================================================
-   Base + Tokens  —  "Phosphor": warm green-ink, chartreuse glow
+   Base + Tokens  —  Clean off-white, flat green accent
    ========================================================= */
 :root {
-    /* surfaces — warm, green-tinted ink (not the stock blue-black) */
-    --bg: #0a0d0a;
-    --bg-2: #0e130e;
-    --surface: rgba(180, 243, 59, 0.035);
-    --surface-2: rgba(180, 243, 59, 0.07);
-    --surface-3: rgba(180, 243, 59, 0.11);
-    --border: rgba(214, 240, 200, 0.09);
-    --border-strong: rgba(214, 240, 200, 0.18);
+    /* surfaces — soft off-white */
+    --bg: #f6f6f1;
+    --bg-2: #ffffff;
+    --surface: #ffffff;
+    --surface-2: #eef0e9;
+    --surface-3: #e6e8df;
+    --border: rgba(24, 32, 24, 0.10);
+    --border-strong: rgba(24, 32, 24, 0.20);
 
-    /* text — soft warm-white with a green undertone */
-    --text: #ecf2e6;
-    --text-muted: #99a892;
-    --text-dim: #69755f;
+    /* text — soft near-black */
+    --text: #1c211b;
+    --text-muted: #586057;
+    --text-dim: #8a938a;
 
-    /* accent — phosphor chartreuse-lime + deep emerald (green only) */
-    --accent: #b4f33b;
-    --accent-bright: #d2ff6e;
-    --accent-deep: #2fbf71;
-    --accent-2: #2fbf71;
-    --accent-ink: #0a2310;                  /* dark green text on lime fills */
-    --accent-glow: rgba(180, 243, 59, 0.35);
-    --accent-grad: linear-gradient(118deg, #d2ff6e 0%, #8fe23f 42%, #2fbf71 100%);
+    /* accent — one flat, simple green (no gradients) */
+    --accent: #2e9e5b;
+    --accent-bright: #36b86b;
+    --accent-deep: #25814a;
+    --accent-2: #2e9e5b;
+    --accent-ink: #ffffff;                  /* white text on green fills */
+    --accent-glow: rgba(46, 158, 91, 0.25);
+    --accent-grad: var(--accent);           /* flat — kept as a var so old refs stay green */
 
     /* legacy aliases (kept so existing rules don't break) */
     --green: var(--accent);
@@ -41,9 +41,9 @@
     --radius-lg: 16px;
     --radius-xl: 22px;
 
-    --shadow-sm: 0 4px 18px rgba(0, 0, 0, 0.4);
-    --shadow-card: 0 12px 34px rgba(0, 0, 0, 0.5);
-    --shadow-card-hover: 0 26px 54px rgba(0, 0, 0, 0.6);
+    --shadow-sm: 0 4px 14px rgba(24, 32, 24, 0.06);
+    --shadow-card: 0 8px 24px rgba(24, 32, 24, 0.08);
+    --shadow-card-hover: 0 16px 38px rgba(24, 32, 24, 0.14);
 
     --page-max: 1180px;
     --topbar-h: 64px;
@@ -67,29 +67,8 @@ body {
     margin: 0;
     color: var(--text);
     background-color: var(--bg);
-    /* fixed ambient glow + faint engineering grid behind everything */
-    background-image:
-        radial-gradient(58rem 58rem at 10% -10%, rgba(180, 243, 59, 0.11), transparent 60%),
-        radial-gradient(48rem 48rem at 100% 4%, rgba(47, 191, 113, 0.12), transparent 55%),
-        radial-gradient(72rem 72rem at 50% 124%, rgba(143, 226, 63, 0.07), transparent 60%),
-        linear-gradient(rgba(214, 240, 200, 0.022) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(214, 240, 200, 0.022) 1px, transparent 1px);
-    background-size: auto, auto, auto, 64px 64px, 64px 64px;
-    background-attachment: fixed;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-}
-
-/* fine film grain — sits above everything visually, ignores pointer events */
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    pointer-events: none;
-    opacity: 0.05;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 a { color: var(--accent); }
@@ -100,15 +79,15 @@ a { color: var(--accent); }
 }
 
 /* Custom scrollbar */
-* { scrollbar-color: rgba(180,243,59,0.35) transparent; scrollbar-width: thin; }
+* { scrollbar-color: rgba(46,158,91,0.45) transparent; scrollbar-width: thin; }
 *::-webkit-scrollbar { width: 10px; height: 10px; }
 *::-webkit-scrollbar-thumb {
-    background: rgba(180,243,59,0.22);
+    background: rgba(46,158,91,0.35);
     border-radius: 999px;
     border: 2px solid transparent;
     background-clip: content-box;
 }
-*::-webkit-scrollbar-thumb:hover { background: rgba(180,243,59,0.4); background-clip: content-box; }
+*::-webkit-scrollbar-thumb:hover { background: rgba(46,158,91,0.6); background-clip: content-box; }
 
 /* Scroll reveal */
 .reveal {
@@ -130,9 +109,9 @@ a { color: var(--accent); }
    Topbar / Header
    ========================================================= */
 .topbar {
-    background-color: rgba(10, 13, 10, 0.72);
-    -webkit-backdrop-filter: saturate(160%) blur(14px);
-    backdrop-filter: saturate(160%) blur(14px);
+    background-color: rgba(246, 246, 241, 0.82);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    backdrop-filter: saturate(140%) blur(14px);
     border-bottom: 1px solid var(--border);
     color: var(--text);
     display: flex;
@@ -166,16 +145,6 @@ a { color: var(--accent); }
     transition: color .3s ease;
     display: inline-flex;
     align-items: center;
-    gap: .5rem;
-}
-/* signature phosphor marker before the wordmark */
-.logo a::before {
-    content: "";
-    width: 11px;
-    height: 11px;
-    border-radius: 3px;
-    background: var(--accent-grad);
-    box-shadow: 0 0 14px var(--accent-glow);
 }
 
 .logo a:hover,
@@ -216,7 +185,7 @@ a { color: var(--accent); }
     position: absolute;
     top: calc(100% + 8px);
     right: 12px;
-    background: rgba(16, 22, 15, 0.96);
+    background: rgba(255, 255, 255, 0.98);
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
     border: 1px solid var(--border-strong);
@@ -294,67 +263,19 @@ a { color: var(--accent); }
     isolation: isolate;
 }
 
-/* animated glow blobs */
-.hero::before,
-.hero::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(70px);
-    opacity: .55;
-    z-index: -1;
-    pointer-events: none;
-}
-.hero::before {
-    width: 38rem; height: 38rem;
-    top: -12rem; left: -8rem;
-    background: radial-gradient(circle, rgba(180,243,59,0.5), transparent 65%);
-    animation: drift1 16s ease-in-out infinite alternate;
-}
-.hero::after {
-    width: 34rem; height: 34rem;
-    top: -6rem; right: -8rem;
-    background: radial-gradient(circle, rgba(47,191,113,0.5), transparent 65%);
-    animation: drift2 19s ease-in-out infinite alternate;
-}
-
-@keyframes drift1 {
-    from { transform: translate(0, 0) scale(1); }
-    to   { transform: translate(6rem, 4rem) scale(1.15); }
-}
-@keyframes drift2 {
-    from { transform: translate(0, 0) scale(1); }
-    to   { transform: translate(-5rem, 5rem) scale(1.1); }
-}
-
 .hero h1 {
     font-family: var(--font-display);
     font-size: clamp(2.4rem, 6vw, 4.2rem);
     line-height: 1.12;
-    padding-bottom: 0.12em;     /* room for descenders (g, y) under clipped gradient text */
     margin: 0 auto;
     max-width: 18ch;
     font-weight: 700;
     letter-spacing: -0.02em;
-    background: linear-gradient(180deg, #ffffff 0%, #c3d2bb 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--text);
 }
 
 .hero h1 .accent {
-    background: var(--accent-grad);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    /* Extend the gradient paint box past the last glyph so the right-side
-       overhang of the 'y' (which sits outside its advance width on some
-       fonts, e.g. mobile system fonts) is still covered. The negative margin
-       cancels the padding so following text isn't pushed. */
-    padding-right: 0.12em;
-    margin-right: -0.12em;
-    -webkit-box-decoration-break: clone;
-            box-decoration-break: clone;
+    color: var(--accent);
 }
 
 .hero .hero-lead {
@@ -388,13 +309,14 @@ a { color: var(--accent); }
     transition: transform .15s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
 }
 .btn-primary {
-    background: var(--accent-grad);
+    background: var(--accent);
     color: var(--accent-ink);
-    box-shadow: 0 10px 30px rgba(180, 243, 59, 0.3);
+    box-shadow: 0 8px 22px rgba(46, 158, 91, 0.28);
 }
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 16px 40px rgba(180, 243, 59, 0.45);
+    background: var(--accent-deep);
+    box-shadow: 0 12px 30px rgba(46, 158, 91, 0.38);
 }
 .btn-ghost {
     background: var(--surface);
@@ -539,7 +461,7 @@ a { color: var(--accent); }
     font-size: 1.2rem;
     color: var(--accent);
     /* opaque so the title on the face physically behind doesn't show through */
-    background: #131a12;
+    background: #ffffff;
     border: 1px solid var(--border-strong);
     border-radius: 8px;
     -webkit-backface-visibility: hidden;
@@ -735,7 +657,7 @@ a { color: var(--accent); }
     background: var(--accent-grad);
     color: var(--accent-ink);
     border-color: transparent;
-    box-shadow: 0 8px 22px rgba(180, 243, 59, 0.3);
+    box-shadow: 0 8px 22px rgba(46, 158, 91, 0.3);
 }
 
 /* Category containers */
@@ -802,7 +724,7 @@ a { color: var(--accent); }
     position: relative;
     width: 100%;
     height: 180px;
-    background: #05090a;
+    background: var(--surface-3);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -838,8 +760,8 @@ a { color: var(--accent); }
     inset: 0;
     z-index: 0;
     background:
-        linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.05) 50%, transparent 70%),
-        #0b110b;
+        linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.6) 50%, transparent 70%),
+        var(--surface-3);
     background-size: 200% 100%;
     animation: shimmer 1.4s infinite;
 }
@@ -867,7 +789,7 @@ a { color: var(--accent); }
     width: 0; height: 0;
     border-style: solid;
     border-width: 13px 0 13px 22px;
-    border-color: transparent transparent transparent var(--text);
+    border-color: transparent transparent transparent #fff;
     margin-left: 6px;
     filter: drop-shadow(0 0 12px rgba(0,0,0,0.5));
 }
@@ -974,7 +896,7 @@ a { color: var(--accent); }
     border-radius: 14px;
     overflow: hidden;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-    background: radial-gradient(circle at 50% 38%, #101510, #05090a 75%);
+    background: #11140f;
     animation: stageIn .25s cubic-bezier(.2,.7,.2,1);
 }
 @keyframes stageIn {
@@ -1005,7 +927,7 @@ a { color: var(--accent); }
     inset: 0;
     width: 100%;
     height: 100%;
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.65);
     font-size: 1.05rem;
     align-items: center;
     justify-content: center;
@@ -1304,7 +1226,7 @@ input.error, textarea.error { border-color: #ff5d5d; }
     transition: transform .1s ease-in-out, box-shadow .2s;
 }
 #submitButton:hover,
-#backButton:hover { transform: scale(1.02); box-shadow: 0 10px 26px rgba(180,243,59,0.32); }
+#backButton:hover { transform: scale(1.02); box-shadow: 0 10px 26px rgba(46,158,91,0.32); }
 #submitButton:active,
 #backButton:active { transform: scale(.98); }
 
