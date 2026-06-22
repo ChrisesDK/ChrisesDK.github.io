@@ -109,11 +109,11 @@ a { color: var(--accent); }
    Topbar / Header
    ========================================================= */
 .topbar {
-    background-color: rgba(246, 246, 241, 0.82);
+    background-color: var(--accent-deep);
     -webkit-backdrop-filter: saturate(140%) blur(14px);
     backdrop-filter: saturate(140%) blur(14px);
-    border-bottom: 1px solid var(--border);
-    color: var(--text);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+    color: #f3f6f1;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -131,7 +131,7 @@ a { color: var(--accent); }
     height: var(--topbar-h);
     display: flex;
     align-items: center;
-    color: var(--text);
+    color: inherit;
     position: relative;
 }
 
@@ -147,11 +147,8 @@ a { color: var(--accent); }
     align-items: center;
 }
 
-.logo a:hover,
-.main-nav a:hover,
-.mobile-menu a:hover {
-    color: var(--accent);
-}
+.logo a:hover { color: #ffffff; }
+.mobile-menu a:hover { color: var(--accent); }
 
 /* Hamburger */
 .hamburger {
@@ -176,7 +173,7 @@ a { color: var(--accent); }
 
 .hamburger:hover .hamburger__icon,
 .hamburger.is-open .hamburger__icon {
-    fill: var(--accent);
+    fill: #ffffff;
 }
 
 /* Mobile dropdown */
@@ -226,14 +223,14 @@ a { color: var(--accent); }
 
 .main-nav a {
     position: relative;
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.82);
     font-weight: 600;
     text-decoration: none;
     padding: .5rem .55rem;
     border-radius: 6px;
     transition: color .25s;
 }
-/* growing phosphor underline instead of a stock pill */
+/* growing underline */
 .main-nav a::after {
     content: "";
     position: absolute;
@@ -242,12 +239,12 @@ a { color: var(--accent); }
     bottom: .15rem;
     height: 2px;
     border-radius: 2px;
-    background: var(--accent-grad);
+    background: #ffffff;
     transform: scaleX(0);
     transform-origin: left center;
     transition: transform .28s cubic-bezier(.2,.7,.2,1);
 }
-.main-nav a:hover { color: var(--text); }
+.main-nav a:hover { color: #ffffff; }
 .main-nav a:hover::after { transform: scaleX(1); }
 
 /* =========================================================
