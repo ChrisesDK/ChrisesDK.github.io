@@ -340,21 +340,7 @@ a { color: var(--accent); }
     font-size: .76rem;
     letter-spacing: .01em;
     color: var(--text-muted);
-    padding: .35rem .8rem;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    background: var(--surface);
-    transition: color var(--trans-fast), border-color var(--trans-fast), background var(--trans-fast);
-}
-.hero-tags span::before {
-    content: "/ ";
-    color: var(--accent);
-    opacity: .8;
-}
-.hero-tags span:hover {
-    color: var(--text);
-    border-color: var(--border-strong);
-    background: var(--surface-2);
+    padding: .35rem .4rem;
 }
 
 /* =========================================================
