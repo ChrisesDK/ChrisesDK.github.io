@@ -18,18 +18,14 @@
       "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/4.png",
       "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/5.png",
       "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/6.mp4",
-      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/6.orig.mp4",
       "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/7.mp4",
-      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/7.orig.mp4",
       "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/8.jpg",
       "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/9.jpg",
       "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/10.jpg",
       "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/11.jpg",
       "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/12.jpg",
       "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/13.mp4",
-      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/13.orig.mp4",
-      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/14.mp4",
-      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/14.orig.mp4"
+      "Assets/Media/App Development/Wireless BLE Controller of Raspberry Pi Pico W/14.mp4"
     ]
   },
   "Game Development": {
@@ -39,8 +35,7 @@
       "Assets/Media/Game Development/AR Path Finding/3.png",
       "Assets/Media/Game Development/AR Path Finding/4.png",
       "Assets/Media/Game Development/AR Path Finding/5.png",
-      "Assets/Media/Game Development/AR Path Finding/6.mp4",
-      "Assets/Media/Game Development/AR Path Finding/6.orig.mp4"
+      "Assets/Media/Game Development/AR Path Finding/6.mp4"
     ],
     "AR Robot Pre-Deployment Validator": [
       "Assets/Media/Game Development/AR Robot Pre-Deployment Validator/1.png",
@@ -50,8 +45,7 @@
       "Assets/Media/Game Development/AR Robot Pre-Deployment Validator/5.png",
       "Assets/Media/Game Development/AR Robot Pre-Deployment Validator/6.png",
       "Assets/Media/Game Development/AR Robot Pre-Deployment Validator/7.png",
-      "Assets/Media/Game Development/AR Robot Pre-Deployment Validator/8.mp4",
-      "Assets/Media/Game Development/AR Robot Pre-Deployment Validator/8.orig.mp4"
+      "Assets/Media/Game Development/AR Robot Pre-Deployment Validator/8.mp4"
     ],
     "Bachelor Project": [
       "Assets/Media/Game Development/Bachelor Project/1.png",
@@ -66,8 +60,7 @@
       "Assets/Media/Game Development/Bachelor Project/10.png",
       "Assets/Media/Game Development/Bachelor Project/11.png",
       "Assets/Media/Game Development/Bachelor Project/12.png",
-      "Assets/Media/Game Development/Bachelor Project/13.mp4",
-      "Assets/Media/Game Development/Bachelor Project/13.orig.mp4"
+      "Assets/Media/Game Development/Bachelor Project/13.mp4"
     ],
     "Construction Site Wrecker": [
       "Assets/Media/Game Development/Construction Site Wrecker/1.png",
@@ -190,9 +183,7 @@
   "Hardware and Robotics": {
     "Escape Room": [
       "Assets/Media/Hardware and Robotics/Escape Room/1.mp4",
-      "Assets/Media/Hardware and Robotics/Escape Room/1.orig.mp4",
-      "Assets/Media/Hardware and Robotics/Escape Room/2.mp4",
-      "Assets/Media/Hardware and Robotics/Escape Room/2.orig.mp4"
+      "Assets/Media/Hardware and Robotics/Escape Room/2.mp4"
     ],
     "Handheld Gaming Device - Big": [
       "Assets/Media/Hardware and Robotics/Handheld Gaming Device - Big/1.jpg",
@@ -209,7 +200,6 @@
     ],
     "Motor Controller PCB": [
       "Assets/Media/Hardware and Robotics/Motor Controller PCB/1.mp4",
-      "Assets/Media/Hardware and Robotics/Motor Controller PCB/1.orig.mp4",
       "Assets/Media/Hardware and Robotics/Motor Controller PCB/2.png",
       "Assets/Media/Hardware and Robotics/Motor Controller PCB/3.png",
       "Assets/Media/Hardware and Robotics/Motor Controller PCB/4.png"
@@ -223,20 +213,14 @@
     ],
     "Omni-Directional Car": [
       "Assets/Media/Hardware and Robotics/Omni-Directional Car/1.mp4",
-      "Assets/Media/Hardware and Robotics/Omni-Directional Car/1.orig.mp4",
       "Assets/Media/Hardware and Robotics/Omni-Directional Car/2.mp4",
-      "Assets/Media/Hardware and Robotics/Omni-Directional Car/2.orig.mp4",
       "Assets/Media/Hardware and Robotics/Omni-Directional Car/3.mp4",
-      "Assets/Media/Hardware and Robotics/Omni-Directional Car/3.orig.mp4",
       "Assets/Media/Hardware and Robotics/Omni-Directional Car/4.mp4",
-      "Assets/Media/Hardware and Robotics/Omni-Directional Car/4.orig.mp4",
-      "Assets/Media/Hardware and Robotics/Omni-Directional Car/5.mp4",
-      "Assets/Media/Hardware and Robotics/Omni-Directional Car/5.orig.mp4"
+      "Assets/Media/Hardware and Robotics/Omni-Directional Car/5.mp4"
     ],
     "Robot Controlled in Virtual Reality": [
       "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/1.jpg",
       "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/2.mp4",
-      "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/2.orig.mp4",
       "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/3.jpg",
       "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/4.jpg",
       "Assets/Media/Hardware and Robotics/Robot Controlled in Virtual Reality/5.jpg",
@@ -248,13 +232,11 @@
     ],
     "Sun-Catcher": [
       "Assets/Media/Hardware and Robotics/Sun-Catcher/1.mp4",
-      "Assets/Media/Hardware and Robotics/Sun-Catcher/1.orig.mp4",
       "Assets/Media/Hardware and Robotics/Sun-Catcher/2.png",
       "Assets/Media/Hardware and Robotics/Sun-Catcher/3.jpg"
     ],
     "Toaster": [
-      "Assets/Media/Hardware and Robotics/Toaster/1.mp4",
-      "Assets/Media/Hardware and Robotics/Toaster/1.orig.mp4"
+      "Assets/Media/Hardware and Robotics/Toaster/1.mp4"
     ]
   },
   "Lego Studio": {
@@ -597,7 +579,6 @@
       "Assets/Media/Lego Studio/Nano Hogwarts Legacy/1.jpg",
       "Assets/Media/Lego Studio/Nano Hogwarts Legacy/2.png",
       "Assets/Media/Lego Studio/Nano Hogwarts Legacy/3.mp4",
-      "Assets/Media/Lego Studio/Nano Hogwarts Legacy/3.orig.mp4",
       "Assets/Media/Lego Studio/Nano Hogwarts Legacy/4.png"
     ],
     "Robot Arm Stor": [
@@ -839,11 +820,8 @@
     "ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025": [
       "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/1.png",
       "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/2.mp4",
-      "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/2.orig.mp4",
       "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/3.mp4",
-      "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/3.orig.mp4",
-      "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/4.mp4",
-      "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/4.orig.mp4"
+      "Assets/Media/Teaching Design/ErhvervsTanken Instructor at Lego Spike Weekly Workshop 2024-2025/4.mp4"
     ],
     "Teknologiskolen Helper at Summer Camp 2024-2025": [
       "Assets/Media/Teaching Design/Teknologiskolen Helper at Summer Camp 2024-2025/1.png",
@@ -856,9 +834,7 @@
       "Assets/Media/Teaching Design/Teknologiskolen Instructor at Autumn Camp 2025/3.png",
       "Assets/Media/Teaching Design/Teknologiskolen Instructor at Autumn Camp 2025/4.jpg",
       "Assets/Media/Teaching Design/Teknologiskolen Instructor at Autumn Camp 2025/5.mp4",
-      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Autumn Camp 2025/5.orig.mp4",
-      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Autumn Camp 2025/6.mp4",
-      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Autumn Camp 2025/6.orig.mp4"
+      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Autumn Camp 2025/6.mp4"
     ],
     "Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025-2026": [
       "Assets/Media/Teaching Design/Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025-2026/1.png",
@@ -866,15 +842,12 @@
       "Assets/Media/Teaching Design/Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025-2026/3.jpg",
       "Assets/Media/Teaching Design/Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025-2026/4.jpg",
       "Assets/Media/Teaching Design/Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025-2026/5.mp4",
-      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025-2026/5.orig.mp4",
       "Assets/Media/Teaching Design/Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025-2026/6.mp4",
-      "Assets/Media/Teaching Design/Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025-2026/6.orig.mp4",
       "Assets/Media/Teaching Design/Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025-2026/7.png",
       "Assets/Media/Teaching Design/Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025-2026/8.png",
       "Assets/Media/Teaching Design/Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025-2026/9.png",
       "Assets/Media/Teaching Design/Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025-2026/10.png",
       "Assets/Media/Teaching Design/Teknologiskolen Instructor at Lego Spike Weekly Workshop 2025-2026/11.mp4"
-    ],
-    "XEO Experience Lead at 3DaysOfDesign VR Demonstration 2026": []
+    ]
   }
 }
