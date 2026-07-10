@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         
 
-        let titleIndex = 0;
+        let titleIndex = 1;
 
         function rotateCube() {
             if (!isSnapping) {
