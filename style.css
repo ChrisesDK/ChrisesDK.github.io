@@ -150,9 +150,9 @@ a { color: var(--accent); }
 .logo a:hover { color: #ffffff; }
 .mobile-menu a:hover { color: var(--accent); }
 
-/* Hamburger */
+/* Hamburger (the only nav, at every width) */
 .hamburger {
-    display: none;
+    display: flex;
     background: none;
     border: none;
     cursor: pointer;
@@ -209,43 +209,6 @@ a { color: var(--accent); }
 
 .mobile-menu a:hover { background: var(--surface-2); color: var(--accent); }
 .mobile-menu.is-open { display: block; animation: fadeIn .18s ease; }
-
-/* Desktop nav */
-.main-nav { display: flex; }
-.main-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0 1rem;
-    display: flex;
-    gap: .25rem;
-}
-.main-nav li { margin: 0; }
-
-.main-nav a {
-    position: relative;
-    color: rgba(255, 255, 255, 0.82);
-    font-weight: 600;
-    text-decoration: none;
-    padding: .5rem .55rem;
-    border-radius: 6px;
-    transition: color .25s;
-}
-/* growing underline */
-.main-nav a::after {
-    content: "";
-    position: absolute;
-    left: .55rem;
-    right: .55rem;
-    bottom: .15rem;
-    height: 2px;
-    border-radius: 2px;
-    background: #ffffff;
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform .28s cubic-bezier(.2,.7,.2,1);
-}
-.main-nav a:hover { color: #ffffff; }
-.main-nav a:hover::after { transform: scaleX(1); }
 
 /* =========================================================
    Hero
@@ -1238,6 +1201,223 @@ input.error, textarea.error { border-color: #ff5d5d; }
 .noscroll { overflow: hidden; }
 
 /* =========================================================
+   Experience timeline
+   ========================================================= */
+.experience-section {
+    padding: 2rem 1.5rem 6rem;
+    position: relative;
+}
+
+.timeline {
+    /* category colours, scoped to the timeline. Education reuses the site
+       accent; the other two are tuned to the accent's saturation/lightness. */
+    --tl-edu: var(--accent);
+    --tl-dev: #3471b2;
+    --tl-teach: #d66329;
+    --tl-row-h: 24px;
+    --tl-bar-h: 9px;     /* same 3:8 bar-to-row ratio as before, just smaller */
+    --tl-scale: 1;       /* title text .75–.9rem, set by script.js */
+    --tl-org-scale: 1;   /* company text .7–.76rem, set by script.js */
+    max-width: var(--page-max);
+    margin: 0 auto;
+    text-align: left;
+}
+.timeline [data-cat="edu"]   { --tl-color: var(--tl-edu); }
+.timeline [data-cat="dev"]   { --tl-color: var(--tl-dev); }
+.timeline [data-cat="teach"] { --tl-color: var(--tl-teach); }
+
+/* card shell; never scrolls sideways (script.js drops detail to fit) */
+.timeline-panel {
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: border-color var(--trans-fast);
+}
+.timeline-panel.is-live { border-color: var(--border-strong); }
+
+.timeline-wrap {
+    position: relative;
+    padding: .6rem .9rem .75rem;
+    /* horizontal drags move the cursor; vertical swipes still scroll the page */
+    touch-action: pan-y pinch-zoom;
+    /* pressing/dragging scrubs the cursor; don't select text or pop the
+       long-press callout instead */
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* titles (max 30%) / companies (max 20%) / timeline (the rest). script.js
+   sizes the first two to their text; every row shares the columns. */
+.timeline-grid {
+    display: grid;
+    grid-template-columns: var(--tl-cols, minmax(0, 3fr) minmax(0, 2fr) minmax(0, 5fr));
+    row-gap: 2px;
+}
+.timeline-row {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    align-items: center;
+    border-radius: var(--radius-sm);
+}
+.timeline-entry { background: color-mix(in srgb, var(--tl-color) 5%, transparent); }
+.timeline-entry.is-alt { background: color-mix(in srgb, var(--tl-color) 10%, transparent); }
+
+.timeline-group {
+    grid-column: 1 / -1;
+    contain: inline-size;   /* spans every column; mustn't widen the title column */
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .55rem 0 .2rem .25rem;
+    line-height: 1.4;
+    font-family: var(--font-display);
+    font-size: .98rem;
+    font-weight: 600;
+    color: var(--text);
+}
+.timeline-dot {
+    flex: 0 0 auto;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--tl-color);
+}
+.timeline-count {
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    font-weight: 500;
+    color: var(--text-dim);
+}
+
+.timeline-title {
+    grid-column: 1;
+    font-size: calc(.9rem * var(--tl-scale));
+    line-height: var(--tl-row-h);
+    color: var(--text-muted);
+    white-space: nowrap;
+    padding: 0 1.4rem 0 .75rem;
+    transition: color .12s ease, opacity .12s ease;
+}
+.timeline-track {
+    grid-column: 3;
+    position: relative;
+    height: var(--tl-row-h);
+    margin-right: .75rem;
+    cursor: ew-resize;
+}
+.timeline-org {
+    grid-column: 2;
+    padding-right: .75rem;
+    line-height: var(--tl-row-h);
+    font-size: calc(.76rem * var(--tl-org-scale));
+    color: var(--text-dim);
+    white-space: nowrap;
+    transition: color .12s ease, opacity .12s ease;
+}
+.timeline-bar {
+    position: absolute;
+    top: calc((var(--tl-row-h) - var(--tl-bar-h)) / 2);
+    height: var(--tl-bar-h);
+    min-width: 6px;
+    border-radius: 999px;
+    background: var(--tl-color);
+    transition: opacity .12s ease;
+}
+
+/* rows under the cursor get stronger text; the rest fade together */
+.timeline-entry.is-active .timeline-title { color: var(--text); }
+.timeline-entry.is-active .timeline-org { color: var(--text-muted); }
+.timeline-entry.is-dim .timeline-title,
+.timeline-entry.is-dim .timeline-org { opacity: .35; }
+.timeline-entry.is-dim .timeline-bar { opacity: .28; }
+
+/* --- fitting steps, toggled by script.js as the width shrinks --- */
+.timeline-title-short,
+.timeline-year-short { display: none; }
+/* 1. companies go (titles may use up to 50%) */
+.timeline-panel.is-no-org .timeline-org { display: none; }
+/* 2. short titles (up to 30%; on phones the column grows instead of cutting) */
+.timeline-panel.is-short .timeline-title-full { display: none; }
+.timeline-panel.is-short .timeline-title-short { display: inline; }
+.timeline-panel.is-short .timeline-wrap { padding-left: .5rem; padding-right: .5rem; }
+.timeline-panel.is-short .timeline-title { padding: 0 .6rem 0 .4rem; }
+.timeline-panel.is-short .timeline-track { margin-right: .5rem; }
+.timeline-panel.is-tight-years .timeline-year-full { display: none; }
+.timeline-panel.is-tight-years .timeline-year-short { display: inline; }
+.timeline-panel.is-sparse-years .timeline-year:nth-child(even) { visibility: hidden; }
+
+/* year axis: room for the labels plus the cursor pill row beneath them */
+.timeline-axis .timeline-track { height: 40px; }
+.timeline-year {
+    position: absolute;
+    top: 0;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: .76rem;
+    line-height: 16px;
+    letter-spacing: .02em;
+    color: var(--text-muted);
+}
+
+/* time cursor (positioned by script.js) */
+.timeline-cursor {
+    position: absolute;
+    bottom: .75rem;   /* matches .timeline-wrap's bottom padding */
+    width: 0;
+    border-left: 1px dashed var(--text-muted);
+    pointer-events: none;
+    opacity: .35;
+    transition: opacity var(--trans-fast);
+}
+.timeline-pill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+    height: 20px;
+    padding: 0 .55rem;
+    border-radius: 999px;
+    background: var(--text);
+    color: var(--surface);
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: .55;
+    transition: opacity var(--trans-fast);
+}
+.timeline-pill i { font-style: normal; opacity: .55; }
+.timeline-panel.is-live .timeline-cursor,
+.timeline-panel.is-live .timeline-pill { opacity: 1; }
+
+/* text alternative for screen readers */
+.timeline-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .timeline * { transition: none; }
+}
+
+/* =========================================================
    Footer
    ========================================================= */
 footer {
@@ -1247,6 +1427,7 @@ footer {
     padding: 2rem 1rem;
     font-size: .9rem;
 }
+footer a { white-space: nowrap; }   /* keep "LinkedIn ↗" together */
 
 /* =========================================================
    Media Queries
@@ -1258,9 +1439,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .main-nav { display: none; }
-    .hamburger { display: flex; }
-
     .hero { padding: 5rem 1.2rem 4rem; }
 
     /* About — stacked: square photo on top, intro below, points stacked */

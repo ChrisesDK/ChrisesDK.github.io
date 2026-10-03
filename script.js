@@ -764,4 +764,283 @@ document.addEventListener('DOMContentLoaded', function () {
             loadVisibleCards();
         });
     }, { passive: true });
+
+    // =========================================================
+    // 9. EXPERIENCE TIMELINE
+    //    Built from timelineData.json. A dashed month cursor sweeps in
+    //    once, follows the pointer over the tracks (snapping to whole
+    //    months) and fades every row that doesn't overlap that month.
+    // =========================================================
+    /**
+     * @typedef {'edu' | 'dev' | 'teach'} TimelineCategoryKey
+     * @typedef {{ key: TimelineCategoryKey, label: string }} TimelineCategory
+     * @typedef {Object} TimelineEntry
+     * @property {TimelineCategoryKey} category
+     * @property {string} title
+     * @property {string} [titleShort] optional; used on narrow screens
+     * @property {string} org        full name, read out by screen readers
+     * @property {string} orgShort   shown in the track; "" for education
+     * @property {string} start      "YYYY-MM"
+     * @property {string} end        "YYYY-MM", inclusive
+     * @typedef {{ categories: TimelineCategory[], entries: TimelineEntry[] }} TimelineData
+     */
+    const timelineRoot = document.getElementById('timeline');
+    if (timelineRoot) {
+        fetch('timelineData.json')
+            .then(res => {
+                if (!res.ok) throw new Error('timelineData.json not found. HTTP ' + res.status);
+                return res.json();
+            })
+            .then(initTimeline)
+            .catch(err => console.error('Could not load timelineData.json:', err));
+    }
+
+    /** @param {TimelineData} data */
+    function initTimeline(data) {
+        const TL_Y0 = 2022;
+        const TL_YEARS = 6;
+        const TL_MONTHS = TL_YEARS * 12;
+        const PILL_TOP = 19;                 // px below the top of the axis track
+        const INTRO_MS = 1100;
+        const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        const panel = document.getElementById('timelinePanel');
+        const wrap = document.getElementById('timelineWrap');
+        const grid = document.getElementById('timelineGrid');
+        const cursor = document.getElementById('timelineCursor');
+        const pill = document.getElementById('timelinePill');
+        const pillText = document.getElementById('timelinePillText');
+        const list = document.getElementById('timelineList');
+
+        const entries = data.entries || [];
+        const categories = data.categories || [];
+
+        const monthIndex = s => { const [y, m] = s.split('-').map(Number); return (y - TL_Y0) * 12 + m - 1; };
+        const fmtMonth = i => MONTH_NAMES[i % 12] + ' ' + (TL_Y0 + Math.floor(i / 12));
+        const fmtRange = (s, e) => s === e ? fmtMonth(s) : fmtMonth(s) + ' – ' + fmtMonth(e);
+        const fmtDuration = n => {
+            const y = Math.floor(n / 12), m = n % 12;
+            return [y ? y + (y === 1 ? ' yr' : ' yrs') : '', m ? m + (m === 1 ? ' mo' : ' mos') : ''].filter(Boolean).join(' ');
+        };
+        const pct = m => m / TL_MONTHS * 100;
+        const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+
+        // --- build the grid + screen-reader list ----------------------------
+        let years = '';
+        for (let k = 0; k < TL_YEARS; k++) {
+            years += `<span class="timeline-year" style="left:${k / TL_YEARS * 100}%;width:${100 / TL_YEARS}%">`
+                   + `<span class="timeline-year-full">${TL_Y0 + k}</span><span class="timeline-year-short">’${String(TL_Y0 + k).slice(2)}</span></span>`;
+        }
+        let html = `<div class="timeline-row timeline-axis" aria-hidden="true"><span></span><div class="timeline-track" id="timelineAxis">${years}</div></div>`;
+        let srHtml = '';
+
+        categories.forEach(cat => {
+            const rows = entries.filter(d => d.category === cat.key);
+            html += `<div class="timeline-group" data-cat="${cat.key}"><span class="timeline-dot"></span>${esc(cat.label)}<span class="timeline-count">${rows.length}</span></div>`;
+            srHtml += `<li>${esc(cat.label)} (${rows.length})<ul>`;
+
+            rows.forEach((d, n) => {
+                const s = monthIndex(d.start), e = monthIndex(d.end) + 1;   // e is exclusive
+                const when = fmtRange(s, e - 1) + ', ' + fmtDuration(e - s);
+                html += `<div class="timeline-row timeline-entry${n % 2 ? ' is-alt' : ''}" data-cat="${d.category}" data-s="${s}" data-e="${e}">`
+                      + `<span class="timeline-title"><span class="timeline-title-full">${esc(d.title)}</span>`
+                      + `<span class="timeline-title-short">${esc(d.titleShort || d.title)}</span></span>`
+                      + `<span class="timeline-org">${esc(d.orgShort || '')}</span>`
+                      + `<div class="timeline-track"><div class="timeline-bar" style="left:${pct(s)}%;width:${pct(e) - pct(s)}%"></div></div>`
+                      + `</div>`;
+                srHtml += `<li>${esc(d.title)}, ${esc(d.org)}, ${esc(when)}</li>`;
+            });
+            srHtml += '</ul></li>';
+        });
+
+        grid.innerHTML = html;
+        list.innerHTML = srHtml;
+
+        const axis = document.getElementById('timelineAxis');
+        const rowEls = [...grid.querySelectorAll('.timeline-entry')];
+
+        // --- time cursor ------------------------------------------------------
+        const REST = monthIndex('2026-06') + 0.5;   // centre of June 2026
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let pos = reduceMotion ? REST : 0.5;
+        let live = false;
+
+        function place(p) {
+            pos = p;
+            const m = Math.min(TL_MONTHS - 1, Math.max(0, Math.floor(p)));
+            pillText.textContent = fmtMonth(m);
+
+            const tr = axis.getBoundingClientRect(), wr = wrap.getBoundingClientRect();
+            const x = tr.left - wr.left + p / TL_MONTHS * tr.width;
+            const half = pill.offsetWidth / 2;
+            const pillTop = tr.top - wr.top + PILL_TOP;
+            pill.style.top = pillTop + 'px';
+            pill.style.left = Math.max(tr.left - wr.left + half, Math.min(tr.right - wr.left - half, x)) + 'px';
+            cursor.style.left = x + 'px';
+            cursor.style.top = (pillTop + pill.offsetHeight) + 'px';
+
+            rowEls.forEach(row => {
+                const on = live && m >= +row.dataset.s && m < +row.dataset.e;
+                row.classList.toggle('is-active', on);
+                row.classList.toggle('is-dim', live && !on);
+            });
+        }
+
+        function setLive(on) {
+            live = on;
+            panel.classList.toggle('is-live', on);
+        }
+
+        // Only the pointer's horizontal position matters.
+        // Mouse/pen: hovering makes the timeline live, leaving rests it.
+        // Touch: pressing is the hover, dragging scrubs, releasing rests it.
+        // A touch that turns into a page scroll gets cancelled by the
+        // browser; the cursor is then put back where it was.
+        let press = null;   // { onTrack, pos } while a finger is down
+
+        // Over the tracks the cursor follows the pointer; over the title
+        // column it stays where it was but the timeline still goes live.
+        // A drag that started on a track keeps scrubbing past either end.
+        function trackPointer(ev) {
+            setLive(true);
+            const tr = axis.getBoundingClientRect();
+            let x = ev.clientX - tr.left;
+            if (press && press.onTrack) x = Math.max(0, Math.min(tr.width, x));
+            if (x >= 0 && x <= tr.width) place(Math.min(TL_MONTHS - 1, Math.floor(x / tr.width * TL_MONTHS)) + 0.5);
+            else place(pos);
+        }
+
+        function rest() {
+            press = null;
+            setLive(false);
+            place(pos);
+        }
+
+        wrap.addEventListener('pointerdown', ev => {
+            if (ev.pointerType === 'touch') press = { onTrack: !!ev.target.closest('.timeline-track'), pos };
+            trackPointer(ev);
+        });
+        wrap.addEventListener('pointermove', ev => {
+            if (ev.pointerType === 'touch' && !press) return;
+            trackPointer(ev);
+        });
+        wrap.addEventListener('pointerup', ev => { if (ev.pointerType === 'touch') rest(); });
+        wrap.addEventListener('pointercancel', ev => {
+            if (ev.pointerType !== 'touch' || !press) return;
+            pos = press.pos;
+            rest();
+        });
+        wrap.addEventListener('pointerleave', ev => { if (ev.pointerType !== 'touch') rest(); });
+        // no long-press context menu while scrubbing
+        wrap.addEventListener('contextmenu', ev => { if (press) ev.preventDefault(); });
+
+        // --- fit to the available width ----------------------------------------
+        // The timeline never scrolls sideways. Titles get at most 30% and
+        // companies at most 20%; each column is only as wide as its widest
+        // text, and the timeline takes everything left over (always >= 50%).
+        // As space runs out, title and company text first shrinks (down to
+        // SCALE_MIN), then:
+        //   1. companies go and titles may use up to 50%,
+        //   2. titles switch to their short form (up to 30% again; on phones
+        //      the column grows instead of cutting a title off),
+        //   3. years become "’24", and finally only every other year is labelled.
+        // Text is measured, so editing the data moves the breakpoints.
+        const SCALE_MIN = 0.75 / 0.9;      // titles never go below .75rem
+        const ORG_SCALE_MIN = 0.7 / 0.76;  // companies never go below .7rem
+        const YEAR_MIN_LABEL = 36;    // px per year needed for "2024"-style labels
+        const YEAR_MIN_SHORT = 27;    // px per year needed for every "’24" label
+
+        const fullTitles = [...grid.querySelectorAll('.timeline-title-full')];
+        const shortTitles = [...grid.querySelectorAll('.timeline-title-short')];
+        const orgLabels = [...grid.querySelectorAll('.timeline-org')].filter(o => o.textContent);
+        const titleCell = grid.querySelector('.timeline-entry .timeline-title');
+        const orgCell = grid.querySelector('.timeline-entry .timeline-org');
+
+        const textWidth = el => {
+            const r = document.createRange();
+            r.selectNodeContents(el);
+            return r.getBoundingClientRect().width;
+        };
+        const widest = els => Math.max(1, ...els.map(textWidth));
+        const padX = el => { const cs = getComputedStyle(el); return parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight); };
+
+        // How far the text must shrink to fit `share` of the grid (1 = no shrink)
+        const fitScale = (els, cell, share) => Math.min(1, (grid.clientWidth * share - padX(cell)) / widest(els));
+        // Column width that fits the widest text at `scale` (+1px for rounding)
+        const colWidth = (els, cell, scale) => Math.ceil(widest(els) * scale + padX(cell) + 1);
+
+        function fitLayout() {
+            panel.classList.remove('is-no-org', 'is-short', 'is-tight-years', 'is-sparse-years');
+            panel.style.setProperty('--tl-scale', 1);   // measure at full size
+
+            panel.style.setProperty('--tl-org-scale', 1);
+
+            let titles = fullTitles;
+            const orgFit = fitScale(orgLabels, orgCell, 0.2);
+            let scale = orgFit < ORG_SCALE_MIN ? 0 : fitScale(fullTitles, titleCell, 0.3);
+            if (scale < SCALE_MIN) {
+                panel.classList.add('is-no-org');
+                scale = fitScale(fullTitles, titleCell, 0.5);
+            }
+            if (scale < SCALE_MIN) {
+                panel.classList.add('is-short');
+                titles = shortTitles;
+                scale = fitScale(shortTitles, titleCell, 0.3);
+            }
+            scale = Math.max(SCALE_MIN, scale);
+            // companies shrink along with the titles, but keep their own floor
+            const orgScale = Math.max(ORG_SCALE_MIN, Math.min(scale, orgFit));
+            const orgW = panel.classList.contains('is-no-org') ? 0 : colWidth(orgLabels, orgCell, orgScale);
+            // measure before applying the scales, then set everything together
+            grid.style.setProperty('--tl-cols', `${colWidth(titles, titleCell, scale)}px ${orgW}px minmax(0, 1fr)`);
+            panel.style.setProperty('--tl-scale', scale.toFixed(3));
+            panel.style.setProperty('--tl-org-scale', orgScale.toFixed(3));
+
+            const yearW = axis.getBoundingClientRect().width / TL_YEARS;
+            if (yearW < YEAR_MIN_LABEL) panel.classList.add('is-tight-years');
+            if (yearW < YEAR_MIN_SHORT) panel.classList.add('is-sparse-years');   // label every other year
+        }
+
+        function refit() {
+            fitLayout();
+            place(pos);
+        }
+
+        // Refit on any size change (resize, rotation, zoom) and once the web
+        // fonts arrive, since they change the text widths. The panel's
+        // width never depends on the fit, so this can't loop.
+        if ('ResizeObserver' in window) new ResizeObserver(refit).observe(panel);
+        else window.addEventListener('resize', refit);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(refit);
+        fitLayout();
+
+        place(pos);
+
+        // Intro: one sweep from the start of the axis to June 2026, played the
+        // first time the timeline scrolls into view (it sits low on the page).
+        if (!reduceMotion) {
+            const sweep = () => {
+                const from = pos, t0 = performance.now();
+                const step = t => {
+                    if (live) return;                       // the user took over
+                    const k = Math.min(1, (t - t0) / INTRO_MS), eased = 1 - Math.pow(1 - k, 3);
+                    place(from + (REST - from) * eased);
+                    if (k < 1) requestAnimationFrame(step);
+                };
+                requestAnimationFrame(step);
+            };
+
+            if ('IntersectionObserver' in window) {
+                const introObserver = new IntersectionObserver((hits, obs) => {
+                    if (hits.some(hit => hit.isIntersecting)) {
+                        obs.disconnect();
+                        sweep();
+                    }
+                }, { threshold: 0.4 });
+                introObserver.observe(panel);
+            } else {
+                sweep();
+            }
+        }
+    }
 });

@@ -1,0 +1,162 @@
+{
+  "categories": [
+    { "key": "edu", "label": "University" },
+    { "key": "dev", "label": "Development" },
+    { "key": "teach", "label": "Teaching (STEM)" }
+  ],
+  "entries": [
+    {
+      "category": "edu",
+      "title": "BSc Game Development & Learning Technology",
+      "titleShort": "BSc",
+      "org": "SDU",
+      "orgShort": "",
+      "start": "2022-09",
+      "end": "2025-06"
+    },
+    {
+      "category": "edu",
+      "title": "MSc Software Engineering",
+      "titleShort": "MSc",
+      "org": "SDU",
+      "orgShort": "",
+      "start": "2025-09",
+      "end": "2027-06"
+    },
+    {
+      "category": "dev",
+      "title": "Mixed Reality Developer",
+      "titleShort": "MR Developer",
+      "org": "ErhvervsTanken",
+      "orgShort": "ErhvervsTanken",
+      "start": "2024-08",
+      "end": "2026-04"
+    },
+    {
+      "category": "dev",
+      "title": "Mobile App Developer",
+      "titleShort": "App Developer",
+      "org": "Teknologiskolen",
+      "orgShort": "Teknologiskolen",
+      "start": "2025-02",
+      "end": "2025-10"
+    },
+    {
+      "category": "dev",
+      "title": "Digital Lesson Experience Developer",
+      "titleShort": "Lesson Developer",
+      "org": "SDU (STEPS Interreg)",
+      "orgShort": "SDU · STEPS",
+      "start": "2025-12",
+      "end": "2027-06"
+    },
+    {
+      "category": "dev",
+      "title": "Hardware Prototype Developer",
+      "titleShort": "HW Developer",
+      "org": "Audio Magic Lab",
+      "orgShort": "Audio Magic Lab",
+      "start": "2026-04",
+      "end": "2026-06"
+    },
+    {
+      "category": "dev",
+      "title": "VR Experience Lead",
+      "titleShort": "VR Lead",
+      "org": "XEO (freelance)",
+      "orgShort": "XEO",
+      "start": "2026-06",
+      "end": "2026-06"
+    },
+    {
+      "category": "teach",
+      "title": "Teaching Assistant",
+      "titleShort": "Assistant",
+      "org": "UCL (freelance)",
+      "orgShort": "UCL",
+      "start": "2024-08",
+      "end": "2024-08"
+    },
+    {
+      "category": "teach",
+      "title": "Teaching Assistant",
+      "titleShort": "Assistant",
+      "org": "Teknologiskolen",
+      "orgShort": "Teknologiskolen",
+      "start": "2024-08",
+      "end": "2024-08"
+    },
+    {
+      "category": "teach",
+      "title": "Volunteer Assistant Instructor",
+      "titleShort": "Volunteer",
+      "org": "Teknologiskolen",
+      "orgShort": "Teknologiskolen",
+      "start": "2024-09",
+      "end": "2025-04"
+    },
+    {
+      "category": "teach",
+      "title": "Teaching Assistant",
+      "titleShort": "Assistant",
+      "org": "diASper Green (freelance)",
+      "orgShort": "diASper Green",
+      "start": "2024-11",
+      "end": "2024-11"
+    },
+    {
+      "category": "teach",
+      "title": "Lead Instructor",
+      "titleShort": "Instructor",
+      "org": "ErhvervsTanken",
+      "orgShort": "ErhvervsTanken",
+      "start": "2025-04",
+      "end": "2025-12"
+    },
+    {
+      "category": "teach",
+      "title": "VR Workshop Lead",
+      "titleShort": "VR Workshop",
+      "org": "ErhvervsTanken",
+      "orgShort": "ErhvervsTanken",
+      "start": "2025-05",
+      "end": "2025-05"
+    },
+    {
+      "category": "teach",
+      "title": "Teaching Assistant",
+      "titleShort": "Assistant",
+      "org": "Teknologiskolen",
+      "orgShort": "Teknologiskolen",
+      "start": "2025-07",
+      "end": "2025-07"
+    },
+    {
+      "category": "teach",
+      "title": "Volunteer Lead Instructor",
+      "titleShort": "Instructor",
+      "org": "Teknologiskolen",
+      "orgShort": "Teknologiskolen",
+      "start": "2025-07",
+      "end": "2027-04"
+    },
+    {
+      "category": "teach",
+      "title": "Lead Instructor",
+      "titleShort": "Instructor",
+      "org": "Teknologiskolen",
+      "orgShort": "Teknologiskolen",
+      "start": "2025-10",
+      "end": "2025-10"
+    },
+    {
+      "category": "teach",
+      "title": "Lead Instructor",
+      "titleShort": "Instructor",
+      "org": "Teknologiskolen",
+      "orgShort": "Teknologiskolen",
+      "start": "2026-06",
+      "end": "2026-07"
+    }
+  ]
+}

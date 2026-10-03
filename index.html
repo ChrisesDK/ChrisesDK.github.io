@@ -17,29 +17,23 @@
                 <a href="#hero">Portfolio</a>
             </div>
 
-            <!-- NEW hamburger -->
+            <!-- Hamburger (the only nav, at every width) -->
             <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false">
                 <svg class="hamburger__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true" focusable="false">
                     <path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
                 </svg>
             </button>
 
-            <!-- NEW mobile dropdown -->
+            <!-- Dropdown menu -->
             <div class="mobile-menu" id="mobileMenu">
                 <ul>
                     <li><a href="#about">About Me</a></li>
                     <li><a href="#projects">My Projects</a></li>
+                    <li><a href="#experience">My Experience</a></li>
+                    <li><a href="https://www.linkedin.com/in/crasm/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">&#8599;</span></a></li>
                     <!-- <li><a href="#contact">Contact Me</a></li> -->
                 </ul>
             </div>
-
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#about">About Me</a></li>
-                    <li><a href="#projects">My Projects</a></li>
-                    <!--<li><a href="#contact">Contact Me</a></li>-->
-                </ul>
-            </nav>
         </header>
 
         <!-- Hero Section -->
@@ -53,9 +47,9 @@
             </p>
 
             <div class="hero-cta reveal">
-                <a href="#projects" class="btn btn-primary">View my work</a>
-                <a href="https://chirses.itch.io/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Play my games <span aria-hidden="true">&#8599;</span></a>
-                <a href="#about" class="btn btn-ghost">About me</a>
+                <a href="#projects" class="btn btn-primary">My Projects</a>
+                <a href="#experience" class="btn btn-ghost">My Experience</a>
+                <a href="https://chirses.itch.io/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Play My Games <span aria-hidden="true">&#8599;</span></a>
             </div>
 
             <div class="hero-tags reveal">
@@ -954,6 +948,26 @@
             </div>
         </section>
 
+        <!-- Experience Section -->
+        <section id="experience" class="experience-section">
+            <div class="section-head reveal">
+                <h2>My Experience</h2>
+                <p>Education, development work and teaching from 2022 to 2027. Each role is described in more detail on my <a href="https://www.linkedin.com/in/crasm/" target="_blank" rel="noopener noreferrer">LinkedIn&nbsp;<span aria-hidden="true">&#8599;</span></a></p>
+            </div>
+
+            <!-- Built by script.js from timelineData.json -->
+            <div class="timeline reveal" id="timeline">
+                <div class="timeline-panel" id="timelinePanel">
+                    <div class="timeline-wrap" id="timelineWrap">
+                        <div class="timeline-grid" id="timelineGrid" aria-hidden="true"></div>
+                        <div class="timeline-cursor" id="timelineCursor" aria-hidden="true"></div>
+                        <div class="timeline-pill" id="timelinePill" aria-hidden="true"><i>&lsaquo;</i><span id="timelinePillText"></span><i>&rsaquo;</i></div>
+                    </div>
+                </div>
+                <ul class="timeline-sr" id="timelineList" aria-label="Education and experience"></ul>
+            </div>
+        </section>
+
         <!-- GALLERY MODAL -->
         <div class="gallery-modal" id="galleryModal" aria-modal="true" role="dialog" aria-label="Project media viewer">
             <!-- The stage shrink-wraps the media; all chrome floats over it -->
@@ -1011,7 +1025,7 @@
 
         <!-- Footer -->
         <footer>
-            <p>My Portfolio 2026 - Christian Rasmussen</p>
+            <p>My Portfolio 2026 - Christian Rasmussen &middot; <a href="https://www.linkedin.com/in/crasm/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">&#8599;</span></a></p>
         </footer>
 
         <script src="script.js"></script>
