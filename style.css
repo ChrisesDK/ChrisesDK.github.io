@@ -1214,13 +1214,21 @@ input.error, textarea.error { border-color: #ff5d5d; }
     --tl-edu: var(--accent);
     --tl-dev: #3471b2;
     --tl-teach: #d66329;
-    --tl-row-h: 24px;
-    --tl-bar-h: 9px;     /* same 3:8 bar-to-row ratio as before, just smaller */
+    /* Vertical spacing follows the window height: compact (24px rows) up to
+       800px tall, roomy (32px rows) from 1100px, blended in between.
+       --tl-grow runs 0 -> 300px across that range. */
+    --tl-grow: clamp(0px, 100vh - 800px, 300px);
+    --tl-row-h: calc(24px + var(--tl-grow) * 8 / 300);
+    --tl-bar-h: calc(var(--tl-row-h) * 3 / 8);   /* bars keep a 3:8 ratio to their row */
     --tl-scale: 1;       /* title text .75–.9rem, set by script.js */
     --tl-org-scale: 1;   /* company text .7–.76rem, set by script.js */
     max-width: var(--page-max);
     margin: 0 auto;
     text-align: left;
+}
+/* small-viewport units don't change as mobile toolbars show/hide */
+@supports (height: 100svh) {
+    .timeline { --tl-grow: clamp(0px, 100svh - 800px, 300px); }
 }
 .timeline [data-cat="edu"]   { --tl-color: var(--tl-edu); }
 .timeline [data-cat="dev"]   { --tl-color: var(--tl-dev); }
@@ -1255,7 +1263,7 @@ input.error, textarea.error { border-color: #ff5d5d; }
 .timeline-grid {
     display: grid;
     grid-template-columns: var(--tl-cols, minmax(0, 3fr) minmax(0, 2fr) minmax(0, 5fr));
-    row-gap: 2px;
+    row-gap: calc(2px + var(--tl-grow) / 300);
 }
 .timeline-row {
     grid-column: 1 / -1;
@@ -1273,7 +1281,7 @@ input.error, textarea.error { border-color: #ff5d5d; }
     display: flex;
     align-items: center;
     gap: .5rem;
-    padding: .55rem 0 .2rem .25rem;
+    padding: calc(.55rem + var(--tl-grow) * 4.8 / 300) 0 calc(.2rem + var(--tl-grow) * 2.4 / 300) .25rem;   /* +.3rem / +.15rem at full height */
     line-height: 1.4;
     font-family: var(--font-display);
     font-size: .98rem;
